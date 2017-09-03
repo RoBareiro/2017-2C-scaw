@@ -12,7 +12,7 @@ public interface UsuarioService {
 	
 /******************************************************************************************************/	
 
-	public Usuario registro(Usuario usuarioRegistro);
+	public Usuario registroServicio(Usuario usuarioRegistro);
 	
 /******************************************************************************************************/
 

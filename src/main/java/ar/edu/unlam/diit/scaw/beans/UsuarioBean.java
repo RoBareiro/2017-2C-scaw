@@ -15,11 +15,12 @@ public class UsuarioBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	private Integer id = null;
 	private String eMail = null;
 	private String contraseña = null;
-	private Integer id = null;
 	private String apellido = null;
 	private String nombre = null;
+	private Integer idEstadoUsuario = null;
 	
 	
 	UsuarioService service;
@@ -29,13 +30,14 @@ public class UsuarioBean implements Serializable {
 		service = (UsuarioService) new UsuarioServiceImpl();
 	}
 	
-	public UsuarioBean(String eMail, String contraseña, Integer id, String apellido, String nombre) {
+	public UsuarioBean(String eMail, String contraseña, Integer id, String apellido, String nombre, Integer idEstadoUsuario) {
 		super();
 		this.eMail = eMail;
 		this.contraseña = contraseña;
 		this.id = id;
 		this.apellido = apellido;
 		this.nombre = nombre;
+		this.idEstadoUsuario = idEstadoUsuario;
 	}
 	
 	public String save() {
@@ -86,15 +88,17 @@ public class UsuarioBean implements Serializable {
 	public String registro(){
 		
 		Usuario usuarioRegistro = new Usuario();
+		
 		usuarioRegistro.setEmail(this.eMail);
 		usuarioRegistro.setContraseña(this.contraseña);
 		usuarioRegistro.setApellido(this.apellido);
 		usuarioRegistro.setNombre(this.nombre);
+		usuarioRegistro.setIdEstadoUsuario(this.idEstadoUsuario);
 		
-		Usuario registrado = service.registro(usuarioRegistro);		
-		if(registrado!=null) 
-		{
-			return "welcome";			
+		Usuario registrado = service.registroServicio(usuarioRegistro);		
+		if(registrado == null) 
+		{/*Si retorna null es porque no existe en la bd, entonces se podria registrar con exito*/
+			return "registroCorrecto";			
 		}
 		else
 		{
@@ -156,6 +160,16 @@ public class UsuarioBean implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+	
+/**************************************************************************************************************/	
+	
+	public Integer getIdEstadoUsuario() {
+		return idEstadoUsuario;
+	}
 
+	public void setIdEstadoUsuario(Integer idEstadoUsuario) {
+		this.idEstadoUsuario = idEstadoUsuario;
+	}
 
+/***************************************************************************************************************/
 }

@@ -39,9 +39,8 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 /***************************************************************************************************************/	
 	@Override
-	public Usuario registro(Usuario usuarioRegistro) {
-		// TODO Auto-generated method stub
-		return null;
+	public Usuario registroServicio(Usuario usuario){
+		return usuarioHsql.registrarDao(usuario);
 	}
 /****************************************************************************************************************/
 	

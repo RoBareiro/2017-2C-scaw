@@ -100,4 +100,38 @@ public class UsuarioDaoImpl implements UsuarioDao {
 			e.printStackTrace();
 		}		
 	}
+
+/********************************************************************************************************************/	
+/*PRIMERO LO BUSCA POR EMAIL Y APELLIDO - SI EXISTE, NO SE REGISTRA EN LA BD, DE LO CONTRARIO SI.*/	
+	@Override
+	public Usuario registrarDao(Usuario usuario) {
+
+		Usuario estado = null;
+		
+		try {
+			conn = (dataSource.dataSource()).getConnection();
+			Statement query;		
+			query = conn.createStatement();	
+			
+			
+			ResultSet rs = query.executeQuery("SELECT * FROM Usuarios WHERE usuario =" + usuario.getEmail() + "AND apellido =" + usuario.getApellido() + ";");
+			
+			if (rs.next()){
+				estado = null; /*RETORNA NULL PORQUE YA EXISTE EN LA BD UN REGISTRO CON ESOS DATOS*/
+			}
+			else{
+				query.executeUpdate("INSERT INTO Usuarios VALUES(" + usuario.getId() + ", '" + usuario.getEmail() + "', '" + usuario.getContraseña() + "', '" + usuario.getApellido()+ "', '" + usuario.getNombre() + "', '" + usuario.getIdEstadoUsuario() + "');'");
+				estado = usuario;
+			}
+		
+			
+		conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return estado;		
+	}
+	
+/********************************************************************************************************************/
 }

@@ -93,7 +93,7 @@ public class UsuarioDaoImpl implements UsuarioDao {
 			Statement query;
 			
 			query = conn.createStatement();		
-			query.executeUpdate("INSERT INTO Usuarios VALUES(" + usuario.getId() + ", '" + usuario.getEmail() + "', '" + usuario.getContraseña() + "', '" + usuario.getApellido()+ "', '" + usuario.getNombre() + "', 1);");
+			query.executeUpdate("INSERT INTO Usuarios VALUES(" + usuario.getId() + ", '" + usuario.getEmail() + "', '" + usuario.getContraseña() + "', '" + usuario.getApellido()+ "', '" + usuario.getNombre() + "', 1)");
 						
 			conn.close();
 		} catch (SQLException e) {
@@ -114,13 +114,13 @@ public class UsuarioDaoImpl implements UsuarioDao {
 			query = conn.createStatement();	
 			
 			
-			ResultSet rs = query.executeQuery("SELECT * FROM Usuarios WHERE usuario =" + usuario.getEmail() + "AND apellido =" + usuario.getApellido() + ";");
+			ResultSet rs = query.executeQuery("SELECT * FROM Usuarios WHERE usuario =" + usuario.getEmail() + "AND apellido =" + usuario.getApellido());
 			
 			if (rs.next()){
-				estado = null; /*RETORNA NULL PORQUE YA EXISTE EN LA BD UN REGISTRO CON ESOS DATOS*/
+				estado = null; /*HAGO RETORNAR NULL PORQUE YA EXISTE EN LA BD UN REGISTRO CON ESOS DATOS*/
 			}
 			else{
-				query.executeUpdate("INSERT INTO Usuarios VALUES(" + usuario.getId() + ", '" + usuario.getEmail() + "', '" + usuario.getContraseña() + "', '" + usuario.getApellido()+ "', '" + usuario.getNombre() + "', '" + usuario.getIdEstadoUsuario() + "');'");
+				query.executeUpdate("INSERT INTO Usuarios VALUES(" + usuario.getId() + ", '" + usuario.getEmail() + "', '" + usuario.getContraseña() + "', '" + usuario.getApellido()+ "', '" + usuario.getNombre() + "', '" + usuario.getIdEstadoUsuario()+ "')'");
 				estado = usuario;
 			}
 		

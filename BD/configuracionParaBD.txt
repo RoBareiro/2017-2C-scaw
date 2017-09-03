@@ -1,0 +1,11 @@
+context.xml (en servidor)
+
+    <Resource name="jdbc/EvaluacionesUnlam" auth="Container" 
+    	type="javax.sql.DataSource"
+        driverClassName="org.hsqldb.jdbc.JDBCDriver" 
+        url="jdbc:hsqldb:file://C:/tmp/EvaluacionesUnlam"
+        username="SA" 
+        maxActive="20" 
+        maxIdle="30"
+        maxWait="10000" 
+    />

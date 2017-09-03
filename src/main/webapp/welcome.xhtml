@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+	<title>UNLAM - Sistema de evaluación</title>
+	<link rel="stylesheet" type="text/css" href="css/table-style.css" />
+</h:head>
+
+<h:body>
+	<h2>Bienvenido. A continuación se visualizan los usuarios habilitados, mostrando cómo JSF renderiza la página con los resultados obtenidos</h2>
+	<h:form>
+		<h:outputLabel value="#{usuarioBean.nombre}" />
+		<br />
+		<br />
+		<h:outputLabel value="#{usuarioBean.apellido}" />
+		<br />
+		<br />
+		<h:outputLabel value="#{usuarioBean.email}" />
+		<br />
+		<br />
+		<h:commandButton value="Back" action="index" >
+	        <f:ajax render="@form" />
+		</h:commandButton>
+	</h:form>
+
+	<br />
+	<br />
+
+	<h:dataTable value="#{usuarioBean.findAll}" var="usuario"
+		styleClass="order-table" headerClass="order-table-header"
+		rowClasses="order-table-odd-row,order-table-even-row">
+
+		<h:column>
+			<f:facet name="header">Nombre</f:facet>    				
+      		#{usuario.nombre}
+  		 </h:column>
+
+		<h:column>
+			<f:facet name="header">Apellido</f:facet>
+      		#{usuario.apellido}
+   		</h:column>
+
+		<h:column>
+			<f:facet name="header">Email</f:facet>
+    	  	#{usuario.email}
+	   </h:column>
+
+	</h:dataTable>
+
+</h:body>
+</html>

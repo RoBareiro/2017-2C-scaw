@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<%@ taglib uri="http://java.sun.com/jsf/html" prefix="h" %>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html">
+	
 
 <h:head>
-	<title>UNLAM - Sistema de evaluación</title>
-	<link rel="stylesheet" type="text/css" href="css/table-style.css" />
+	<title>UNLAM - Sistema de evaluación</title>	
+	
+	<script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/validation.js"></script>
 </h:head>
 
 <h:body>
@@ -30,9 +35,7 @@
 	<br />
 	<br />
 
-	<h:dataTable value="#{usuarioBean.findAll}" var="usuario"
-		styleClass="order-table" headerClass="order-table-header"
-		rowClasses="order-table-odd-row,order-table-even-row">
+	<h:dataTable value="#{usuarioBean.findAll}" var="usuario">
 
 		<h:column>
 			<f:facet name="header">Nombre</f:facet>    				

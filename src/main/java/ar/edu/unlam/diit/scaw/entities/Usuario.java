@@ -1,35 +1,18 @@
 package ar.edu.unlam.diit.scaw.entities;
 
 import java.io.Serializable;
-
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import java.util.List;
 
 public class Usuario implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@Id 
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String email;
 	private String contraseña;
 	private String apellido;
 	private String nombre;
-	private Integer idEstadoUsuario;
-
-/*************************************************************************************************************/	
-	
-	public Integer getIdEstadoUsuario() {
-		return idEstadoUsuario;
-	}
-
-	public void setIdEstadoUsuario(Integer idEstadoUsuario) {
-		this.idEstadoUsuario = idEstadoUsuario;
-	}
-
-/*************************************************************************************************************/	
+	private List<Integer> idRol;
 	
 	public Usuario() {
 	}
@@ -74,4 +57,19 @@ public class Usuario implements Serializable {
 		this.contraseña = contraseña;
 	}
 
+	public List<Integer> getIdRol() {
+		return idRol;
+	}
+
+	public void setIdRol(List<Integer> idRol) {
+		this.idRol = idRol;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	
+
+	
 }

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+	>
+<h:head>
+        <title>Panel de Adminsitracion</title>
+        <!-- Latest compiled and minified CSS -->
+</h:head>
+
+<body>
+
+	<div>
+		<div>
+			<div>
+				<div>
+					<h1>PANEL GESTION EXAMENES
+						</h1>
+				</div>
+				<div>
+					<div></div>
+
+					<div>
+						<table>
+							<h:dataTable value="#{gestionExamenBean.getAllExamen()}" var="gestionexamen">
+								
+								<h:column>
+									<f:facet name="header">Nombre</f:facet>
+									#{gestionexamen.nombre}
+								</h:column>
+
+								<h:column>
+									<f:facet name="header">Materia</f:facet>
+									#{gestionexamen.Materia}
+								</h:column>
+
+								<h:column>
+									<f:facet name="header">Estado del examen</f:facet>
+									#{gestionexamen.Estado}
+								</h:column>
+
+								<h:column>
+									<f:facet name="header">Accion</f:facet>
+								     #{gestionexamen.Accion}
+									 <button type="button">Crear Examen</button>
+									     
+								</h:column>
+                                 
+								 <h:column>
+									<f:facet name="header">Accion</f:facet>
+					    	  		<button type="button"><span></span></button>
+                                    <button type="button"><span></span></button>
+						   		</h:column>
+							</h:dataTable>
+						</table>
+					</div>
+					<div></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+
+</html>

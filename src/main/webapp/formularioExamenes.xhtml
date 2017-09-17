@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+<h:head>
+	<title>Panel de Adminsitracion</title>
+	<!-- Latest compiled and minified CSS -->
+</h:head>
+<body>
+	<div>
+
+		<div>
+
+			<div></div>
+
+			<div>
+				
+					<div>
+						<div>
+							<h1>ABM EXAMENES</h1>
+						</div>
+						<div>
+							<div></div>
+							<div>
+								<h:form>
+									<h2>Nombre del Examen</h2>
+									<h:inputText size="60"
+										value="#{Examen.nombre}" id="nombreExamen"
+										p:placeholder="Ingrese Nombre"></h:inputText>
+									<h2>Materia</h2>
+
+									<h:selectOneMenu value="#{materia.gerAllMaterias()}">
+										<f:selectItem itemValue="ProgramacionWeb 1"
+											itemLabel="ProgramacionWeb 1" />
+										<f:selectItem itemValue="ProgramacionWeb 2"
+											itemLabel="ProgramacionWeb 2" />
+										<f:selectItem itemValue="ProgramacionWeb 3"
+											itemLabel="ProgramacionWeb 3" />
+										<f:selectItem itemValue="ProgramacionWeb 3"
+											itemLabel="ProgramacionWeb 3" />
+										<f:selectItem itemValue="Taller1" itemLabel="Taller2" />
+									</h:selectOneMenu>
+
+
+									<h2>Estado</h2>
+
+
+									<h:selectOneRadio value="#{Estado.GetEstado()}">
+										<f:selectItem itemValue="estado" itemLabel="Habilitado" />
+										<f:selectItem itemValue="estado" itemLabel="Deshabilitado" />
+									</h:selectOneRadio>
+
+
+									<h2>Pregunta 1</h2>
+									<h:inputText size="60"
+										value="#{Examen.pregunta1}" id="pregunta1"
+										p:placeholder="Ingrese Nombre"></h:inputText>
+
+									<h4>Respuesta 1</h4>
+									<h:inputText size="60"
+										value="#{Examen.pregunta1}" id="pregunta1"
+										p:placeholder="Ingrese Nombre"></h:inputText>
+
+									<h:selectBooleanCheckbox id="check"
+										value="#{repuestaController.repuestaController.check}" />
+									<h:outputLabel value="#{messages.rememberMeLabel}" for="check" />
+
+									<h:selectBooleanCheckbox id="check"
+										value="#{repuestaController.repuestaController.check}" />
+									<h:outputLabel value="#{messages.rememberMeLabel}" for="check" />
+
+
+
+									<h4>Respuesta 2</h4>
+									<h:inputText size="60"
+										value="#{Examen.pregunta1}" id="pregunta1"
+										p:placeholder="Ingrese Nombre"></h:inputText>
+
+									<h:selectBooleanCheckbox id="check"
+										value="#{repuestaController.repuestaController.check}" />
+									<h:outputLabel value="#{messages.rememberMeLabel}" for="check" />
+
+									<h:selectBooleanCheckbox id="check"
+										value="#{repuestaController.repuestaController.check}" />
+									<h:outputLabel value="#{messages.rememberMeLabel}" for="check" />
+
+
+									<h4>Respuesta 3</h4>
+
+									<h:inputText size="60"
+										value="#{Examen.pregunta1}" id="pregunta1"
+										p:placeholder="Ingrese Nombre"></h:inputText>
+
+									<h:selectBooleanCheckbox id="check"
+										value="#{repuestaController.repuestaController.check}" />
+									<h:outputLabel value="#{messages.rememberMeLabel}" for="check" />
+
+									<h:selectBooleanCheckbox id="check"
+										value="#{repuestaController.repuestaController.check}" />
+									<h:outputLabel value="#{messages.rememberMeLabel}" for="check" />
+
+									<h2>Pregunta 2</h2>
+									<h:inputText size="60"
+										value="#{Examen.pregunta2}" id="pregunta2"
+										p:placeholder="Ingrese Nombre"></h:inputText>
+
+									<h4>Respuesta 1</h4>
+
+									<h:inputText size="60"
+										value="#{Examen.pregunta2}" id="pregunta2"
+										p:placeholder="Ingrese Nombre"></h:inputText>
+
+									<h:selectBooleanCheckbox id="check"
+										value="#{repuestaController.repuestaController.check}" />
+									<h:outputLabel value="#{messages.rememberMeLabel}" for="check" />
+
+									<h:selectBooleanCheckbox id="check"
+										value="#{repuestaController.repuestaController.check}" />
+									<h:outputLabel value="#{messages.rememberMeLabel}" for="check" />
+
+
+									<h4>Respuesta 2</h4>
+
+									<h:inputText size="60"
+										value="#{Examen.pregunta2}" id="pregunta2"
+										p:placeholder="Ingrese Nombre"></h:inputText>
+
+									<h:selectBooleanCheckbox id="check"
+										value="#{repuestaController.repuestaController.check}" />
+									<h:outputLabel value="#{messages.rememberMeLabel}" for="check" />
+
+									<h:selectBooleanCheckbox id="check"
+										value="#{repuestaController.repuestaController.check}" />
+									<h:outputLabel value="#{messages.rememberMeLabel}" for="check" />
+
+
+									<h4>Respuesta 3</h4>
+
+									<h:inputText size="60"
+										value="#{Examen.pregunta2}" id="pregunta2"
+										p:placeholder="Ingrese Nombre"></h:inputText>
+
+									<h:selectBooleanCheckbox id="check"
+										value="#{repuestaController.repuestaController.check}" />
+									<h:outputLabel value="#{messages.rememberMeLabel}" for="check" />
+
+									<h:selectBooleanCheckbox id="check"
+										value="#{repuestaController.repuestaController.check}" />
+									<h:outputLabel value="#{messages.rememberMeLabel}" for="check" />
+
+
+									<h2>Pregunta 3</h2>
+									<h:inputText size="60"
+										value="#{Examen.pregunta3}" id="pregunta3"
+										p:placeholder="Ingrese Nombre"></h:inputText>
+
+									<h4>Respuesta 1</h4>
+
+									<h:inputText size="60"
+										value="#{Examen.pregunta3}" id="pregunta3"
+										p:placeholder="Ingrese Nombre"></h:inputText>
+
+									<h:selectBooleanCheckbox id="check"
+										value="#{repuestaController.repuestaController.check}" />
+									<h:outputLabel value="#{messages.rememberMeLabel}" for="check" />
+
+									<h:selectBooleanCheckbox id="check"
+										value="#{repuestaController.repuestaController.check}" />
+									<h:outputLabel value="#{messages.rememberMeLabel}" for="check" />
+
+									<h4>Respuesta 2</h4>
+
+									<h:inputText size="60"
+										value="#{Examen.pregunta3}" id="pregunta3"
+										p:placeholder="Ingrese Nombre"></h:inputText>
+
+									<h:selectBooleanCheckbox id="check"
+										value="#{repuestaController.repuestaController.check}" />
+									<h:outputLabel value="#{messages.rememberMeLabel}" for="check" />
+
+									<h:selectBooleanCheckbox id="check"
+										value="#{repuestaController.repuestaController.check}" />
+									<h:outputLabel value="#{messages.rememberMeLabel}" for="check" />
+
+									<h4>Respuesta 3</h4>
+
+									<h:inputText size="60"
+										value="#{Examen.pregunta3}" id="pregunta3"
+										p:placeholder="Ingrese Nombre"></h:inputText>
+
+									<h:selectBooleanCheckbox id="check"
+										value="#{repuestaController.repuestaController.check}" />
+									<h:outputLabel value="#{messages.rememberMeLabel}" for="check" />
+
+									<h:selectBooleanCheckbox id="check"
+										value="#{repuestaController.repuestaController.check}" />
+									<h:outputLabel value="#{messages.rememberMeLabel}" for="check" />
+
+									<h:commandButton value="Submit"
+										name="Enviar" action="#{Examen.submit}" />
+								</h:form>
+							</div>
+
+						</div>
+					</div>
+			</div>
+
+			<div></div>
+
+		</div>
+
+	</div>
+
+</body>
+</html>

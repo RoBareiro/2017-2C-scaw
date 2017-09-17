@@ -2,10 +2,14 @@ package ar.edu.unlam.diit.scaw.beans;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
+
 import ar.edu.unlam.diit.scaw.entities.Usuario;
+import ar.edu.unlam.diit.scaw.services.MateriaService;
 import ar.edu.unlam.diit.scaw.services.UsuarioService;
 import ar.edu.unlam.diit.scaw.services.impl.UsuarioServiceImpl;
 
@@ -15,14 +19,21 @@ public class UsuarioBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private Integer id = null;
 	private String eMail = null;
 	private String contraseña = null;
+	private Integer id = null;
 	private String apellido = null;
 	private String nombre = null;
-	private Integer idEstadoUsuario = null;
+	private Integer idRol = null;
+	private Map<Integer,String> roles  = null;
 	
+	@ManagedProperty("#{param.opc}")
+	private String opc = null;
 	
+	@ManagedProperty("#{param.idUsuario}")
+	private Integer idUsuario = null;
+	
+	MateriaService matService;
 	UsuarioService service;
 	
 	public UsuarioBean() {
@@ -30,14 +41,13 @@ public class UsuarioBean implements Serializable {
 		service = (UsuarioService) new UsuarioServiceImpl();
 	}
 	
-	public UsuarioBean(String eMail, String contraseña, Integer id, String apellido, String nombre, Integer idEstadoUsuario) {
+	public UsuarioBean(String eMail, String contraseña, Integer id, String apellido, String nombre) {
 		super();
 		this.eMail = eMail;
 		this.contraseña = contraseña;
 		this.id = id;
 		this.apellido = apellido;
 		this.nombre = nombre;
-		this.idEstadoUsuario = idEstadoUsuario;
 	}
 	
 	public String save() {
@@ -54,6 +64,20 @@ public class UsuarioBean implements Serializable {
 		return list;
 	}
 	
+	public List<Usuario> getFindPend() {
+		List<Usuario> list = service.findPend();
+		return list;
+	}
+	
+	public Usuario getFindById(){
+		return service.findById(idUsuario);
+	}
+	
+	public Map<Integer,String>getFindAllRoles(){
+		
+		return service.findAllRoles();
+	}
+	
 	public String login(){
 		
 		Usuario usuario = new Usuario();
@@ -63,6 +87,15 @@ public class UsuarioBean implements Serializable {
 		Usuario logueado = service.login(usuario);		
 		if(logueado!=null) 
 		{
+			if(logueado.getIdRol().size() > 1){
+			
+				return "multiRol";
+				
+			}else if(logueado.getIdRol().contains(1)){
+				return "admin";
+				
+			}
+			
 			return "welcome";			
 		}
 		else
@@ -70,6 +103,33 @@ public class UsuarioBean implements Serializable {
 			return "index";
 		}		
 	}	
+	
+	public String registro(){
+		
+		String mensaje = "Hola";
+		return mensaje;
+	}
+	
+	public String admin(){
+		
+		return "admin";
+	}
+	
+	public String solicitudes(){
+		
+		service.actualizarEstado((idUsuario), Integer.parseInt(opc));
+		return "admin";
+	}
+	
+	public String consultarUsuario(){
+			
+		return "consultarUsuario";
+	}
+	
+	public String editarUsuario(){
+		
+		return "editarUsuario";
+	}
 
 	private Usuario buildUsuario() {
 		Usuario usuario = new Usuario();
@@ -82,32 +142,6 @@ public class UsuarioBean implements Serializable {
 		
 		return usuario;
 	}
-	
-/**************************************************************************************************************/
-
-	public String registro(){
-		
-		Usuario usuarioRegistro = new Usuario();
-		
-		usuarioRegistro.setEmail(this.eMail);
-		usuarioRegistro.setContraseña(this.contraseña);
-		usuarioRegistro.setApellido(this.apellido);
-		usuarioRegistro.setNombre(this.nombre);
-		usuarioRegistro.setIdEstadoUsuario(this.idEstadoUsuario);
-		
-		Usuario registrado = service.registroServicio(usuarioRegistro);		
-		if(registrado == null) 
-		{/*Si retorna null es porque no existe en la bd, entonces se podria registrar con exito*/
-			return "registroCorrecto";			
-		}
-		else
-		{
-			return "registroUsuario";
-		}		
-	}	
-	
-	
-/*************************************************************************************************************/	
 
 	public String getEmail() {
 		return eMail;
@@ -160,16 +194,55 @@ public class UsuarioBean implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
-/**************************************************************************************************************/	
-	
-	public Integer getIdEstadoUsuario() {
-		return idEstadoUsuario;
+
+	public String geteMail() {
+		return eMail;
 	}
 
-	public void setIdEstadoUsuario(Integer idEstadoUsuario) {
-		this.idEstadoUsuario = idEstadoUsuario;
+	public void seteMail(String eMail) {
+		this.eMail = eMail;
 	}
 
-/***************************************************************************************************************/
+	public MateriaService getMatService() {
+		return matService;
+	}
+
+	public void setMatService(MateriaService matService) {
+		this.matService = matService;
+	}
+
+	public Map<Integer, String> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Map<Integer, String> roles) {
+		this.roles = roles;
+	}
+
+	public Integer getIdRol() {
+		return idRol;
+	}
+
+	public void setIdRol(Integer idRol) {
+		this.idRol = idRol;
+	}
+
+	public String getOpc() {
+		return opc;
+	}
+
+	public void setOpc(String opc) {
+		this.opc = opc;
+	}
+
+	public Integer getIdUsuario() {
+		return idUsuario;
+	}
+
+	public void setIdUsuario(Integer idUsuario) {
+		this.idUsuario = idUsuario;
+	}
+
+	
+
 }

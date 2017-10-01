@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	>
+<h:head>
+        <title>Panel de Adminsitracion</title>
+	<link rel="stylesheet" type="text/css" href="css/table-style.css" />
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+	<link rel="stylesheet" type="text/css" href="css/styles.css" />
+	<link rel="stylesheet" type="text/css" href="css/index.css" />
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"/>
+	
+	
+	<script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/welcome.js"></script>
+</h:head>
+<body>
+<div class ="left-menu">
+<ui:include src="welcome.xhtml"/>
+</div>
+     <div class="body-menu">
+    	 <div class="panel panel-default">
+			<div class="panel-heading"><h3 class="panel-title">Usuarios registrados Activos</h3></div>
+				<div class="panel-body">
+					<h:dataTable value="#{usuarioBean.findAll}" var="usuario" class="table table-hover">
+						<h:column>
+							<f:facet name="header">Nombre y Apellido</f:facet>    				
+					      		#{usuario.nombre} #{usuario.apellido}
+						</h:column>
+						<h:column>
+							<f:facet name="header" >Email</f:facet>
+					    		#{usuario.email}
+						</h:column>
+						<h:column>
+							<f:facet name="header">Accion</f:facet>  		
+							<h:form>
+								<h:commandButton styleClass="btn btn-primary" action="#{usuarioBean.editarUsuario}" value="Modificar Usuario">
+									<f:param name ="idUsuario" value ="#{usuarioBean.idUser}"></f:param>
+									<f:param name ="idUsuarioEdit" value ="#{usuario.id}"></f:param>
+								</h:commandButton>
+								<h:commandButton styleClass="btn btn-warning" action="#{usuarioBean.consultarUsuario}" value="Consultar Usuario">
+									<f:param name ="idUsuario" value ="#{usuarioBean.id}"></f:param>
+									<f:param name ="idUsuarioConsul" value ="#{usuario.id}"></f:param>
+								</h:commandButton>
+							</h:form>
+						</h:column>
+             </h:dataTable>
+	     </div>
+     </div>
+  </div>
+ </body>
+ </html>

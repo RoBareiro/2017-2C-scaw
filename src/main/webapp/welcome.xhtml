@@ -1,58 +1,100 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ taglib uri="http://java.sun.com/jsf/html" prefix="h" %>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html">
-	
 
 <h:head>
-	<title>UNLAM - Sistema de evaluación</title>	
+	<title>UNLAM - Sistema de evaluación</title>
+	<link rel="stylesheet" type="text/css" href="css/table-style.css" />
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+	<link rel="stylesheet" type="text/css" href="css/styles.css" />
+	<link rel="stylesheet" type="text/css" href="css/index.css" />
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"/>
+	
 	
 	<script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="js/jquery.min.js"></script>
-	<script type="text/javascript" src="js/validation.js"></script>
+	<script type="text/javascript" src="js/welcome.js"></script>
+	
 </h:head>
 
 <h:body>
-	<h2>Bienvenido. A continuación se visualizan los usuarios habilitados, mostrando cómo JSF renderiza la página con los resultados obtenidos</h2>
-	<h:form>
-		<h:outputLabel value="#{usuarioBean.nombre}" />
-		<br />
-		<br />
-		<h:outputLabel value="#{usuarioBean.apellido}" />
-		<br />
-		<br />
-		<h:outputLabel value="#{usuarioBean.email}" />
-		<br />
-		<br />
-		<h:commandButton value="Back" action="index" >
-	        <f:ajax render="@form" />
-		</h:commandButton>
+	<h3 class="text-center">Bienvenido a UNLAM - Sistema de evaluación</h3>
+	
+<div class="nav-side-menu">
+	<div class="brand">Panel de Usuario</div>
+		<h:form id="myForm">
+ 			 
+			<h:inputHidden value="#{sessionScope.all}"   id="grantAll" />
+			<h:inputHidden value="#{sessionScope.adm}"   id="grantAdm" />
+			<h:inputHidden value="#{sessionScope.alu}"   id="grantAlu" />
+			<h:inputHidden value="#{sessionScope.doc}"   id="grantDoc" />
+			
+			<div class = "menu-list">	
+				<ul class ="menu-content collapse out">
+					<li>
+						<h:commandLink action="#{usuarioBean.admin}">
+							<h:outputText value ="Perfil"></h:outputText>
+							<f:param name ="idUsuario" value ="#{usuario.id}"></f:param>
+						</h:commandLink>
+					</li>
+					<li id="admLi" data-toggle="collapse" data-target="#administrar" class="collapsed active">
+                  		<a href="#"><i class="fa fa-gift fa-lg"></i> Administrar <span class="arrow"></span></a>
+                	</li>
+					<ul class="sub-menu collapse" id="administrar">
+					<li>
+						<h:commandLink action="#{usuarioBean.solicitudesUsuarios}">
+							<h:outputText value ="Solicitudes Usuarios"></h:outputText>
+							<f:param name ="idUsuario" value ="#{usuarioBean.id}"></f:param>
+						</h:commandLink>
+					</li>
+					<li>
+						<h:commandLink id="perfil" 
+							action="#{usuarioBean.gestionMaterias}" value="Materias">
+							<f:param name ="idUsuario" value ="#{usuarioBean.id}"></f:param>
+						</h:commandLink>
+					</li>
+					<li>
+						<h:commandLink id="usuario" 
+							action="#{usuarioBean.usuariosActivos}" value="Usuarios">
+							<f:param name ="idUsuario" value ="#{usuarioBean.id}"></f:param>
+						</h:commandLink>
+					</li>
+					</ul>
+					<li id="docLi" data-toggle="collapse" data-target="#docente" class="collapsed active">
+                  		<a href="#"><i class="fa fa-gift fa-lg"></i> Docentes <span class="arrow"></span></a>
+                	</li>
+					<ul id="docente" class="sub-menu collapse">
+						<li>
+							<h:commandLink action="#{usuarioBean.gestionExamenes}">
+								<h:outputText value ="Examenes"></h:outputText>
+								<f:param name ="idUsuario" value ="#{usuarioBean.idUser}"></f:param>
+							</h:commandLink>
+						</li>
+						
+					</ul>
+					<li id="aluLI" data-toggle="collapse" data-target="#alumno" class="collapsed active">
+                  		<a href="#"><i class="fa fa-gift fa-lg"></i> Alumno <span class="arrow"></span></a>
+                	</li>
+					<ul id="alumno" class="sub-menu collapse">
+						<li>
+							<h:commandLink action="#{usuarioBean.admin}">
+								<h:outputText value ="Examenes"></h:outputText>
+								<f:param name ="idUsuario" value ="#{usuarioBean.id}"></f:param>
+							</h:commandLink>
+						</li>
+						
+					</ul>
+					
+				</ul>
+			</div>
 	</h:form>
-
-	<br />
-	<br />
-
-	<h:dataTable value="#{usuarioBean.findAll}" var="usuario">
-
-		<h:column>
-			<f:facet name="header">Nombre</f:facet>    				
-      		#{usuario.nombre}
-  		 </h:column>
-
-		<h:column>
-			<f:facet name="header">Apellido</f:facet>
-      		#{usuario.apellido}
-   		</h:column>
-
-		<h:column>
-			<f:facet name="header">Email</f:facet>
-    	  	#{usuario.email}
-	   </h:column>
-
-	</h:dataTable>
+</div>
 
 </h:body>
+
 </html>

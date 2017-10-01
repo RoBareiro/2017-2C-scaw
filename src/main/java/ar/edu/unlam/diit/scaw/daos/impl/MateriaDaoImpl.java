@@ -49,6 +49,7 @@ public class MateriaDaoImpl implements MateriaDao{
 				
 	
 				ll.add(datos);
+				
 			}
 			
 			conn.close();
@@ -68,12 +69,8 @@ public class MateriaDaoImpl implements MateriaDao{
 			query = conn.createStatement();
 			
 			String nombre = " '" + materia.getNombre() + "' ";
-			// Este es el que va, pero hasta que no este armada la parte de asignacion de docente no se puede usar
-			// Integer idDocente = materia.getIdDocenteTitular();
-			Integer idDocente = 1;
 			
-			query.executeUpdate(
-								"INSERT INTO Materias (nombre, idDocenteTitular, idEstadoMateria) VALUES(" + nombre + "," + idDocente + ", 1)");  
+			query.executeUpdate("INSERT INTO Materias (nombre, idDocenteTitular, idEstadoMateria) VALUES(" + nombre + "," + materia.getIdDocenteTitular() + ", 1)");  
 			
 			conn.close();
 		} catch (SQLException e) {
@@ -115,6 +112,53 @@ public class MateriaDaoImpl implements MateriaDao{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}	
+	}
+
+	@Override
+	public DatosMaterias getMateria(String id) {
+		
+		DatosMaterias datos = new DatosMaterias();
+		
+		try {
+			conn = (dataSource.dataSource()).getConnection();
+		
+			Statement query;
+			
+			query = conn.createStatement();
+			
+			ResultSet rs = query.executeQuery("SELECT m.id as idMateria, m.nombre as nombreMateria, m.idEstadoMateria as idEstadoMateria , est.descripcion as descripcion, u.nombre as nombreDocente,u.id as idDocente, u.apellido as apellidoDocente FROM materias as m INNER JOIN estadosmaterias as est ON m.idEstadoMateria = est.id INNER JOIN usuarios as u ON m.idDocenteTitular = u.id WHERE m.id = '" + id + "'");
+			
+			while (rs.next()) {					
+				datos.setIdMateria(rs.getInt("idMateria"));
+				datos.setNombreMateria(rs.getString("nombreMateria"));
+				datos.setDocente(rs.getString("nombreDocente") + " " + rs.getString("apellidoDocente"));
+				datos.setIdDocente(rs.getInt("idDocente"));
+			}
+			
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return datos;
+	}
+
+	@Override
+	public void actualizarDatos(Integer idMateria, Integer docente, String nombre) {
+		try {
+			conn = (dataSource.dataSource()).getConnection();
+		
+			Statement query;
+			
+			query = conn.createStatement();
+						
+			query.executeUpdate("UPDATE materias SET nombre = '" + nombre + "' , idDocenteTitular =" + docente + " WHERE id =" + idMateria + ";");  
+			
+			
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 }

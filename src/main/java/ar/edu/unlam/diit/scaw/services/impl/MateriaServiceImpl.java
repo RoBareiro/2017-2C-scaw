@@ -36,6 +36,7 @@ public class MateriaServiceImpl implements MateriaService{
 		
 	}
 	
+	
 	@Override
 	public void deshabilitarMateria(String id){
 		servicioDao.deshabilitar(id);
@@ -44,6 +45,16 @@ public class MateriaServiceImpl implements MateriaService{
 	@Override
 	public void habilitarMateria(String id){
 		servicioDao.habilitar(id);
+	}
+
+	@Override
+	public DatosMaterias traerMateria(String id) {
+		return servicioDao.getMateria(id);
+	}
+
+	@Override
+	public void actualizarMateria(Integer idMateria, Integer docente, String nombre) {
+		servicioDao.actualizarDatos(idMateria, docente, nombre);
 	}
 
 }

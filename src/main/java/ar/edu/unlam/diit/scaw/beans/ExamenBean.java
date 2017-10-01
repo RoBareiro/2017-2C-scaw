@@ -42,16 +42,12 @@ public ExamenBean(Integer id, String nombre, Integer idDocenteTitular, Integer i
 		return lista;	
 	}
 	
-	public String nuevoExamen(){
-		return "nuevoExamen";
-    }
-	
-	
+		
 	public String guardarExamen(){
 		Examenes examenes = new Examenes();
 		examenes.setNombre(getNombre());
 		servicioExamen.guardarExamen(examenes);
-		return "admin";
+		return "welcome";
 	}
 	
 	public Integer getId() {

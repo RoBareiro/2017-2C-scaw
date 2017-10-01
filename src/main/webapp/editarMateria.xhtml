@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	>
+<h:head>
+<title>Panel de Adminsitracion</title>
+   <!-- Latest compiled and minified CSS -->
+   <link rel="stylesheet" type="text/css" href="css/table-style.css" />
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+	<link rel="stylesheet" type="text/css" href="css/styles.css" />
+	<link rel="stylesheet" type="text/css" href="css/index.css" />
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"/>
+	
+	
+	<script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/welcome.js"></script>
+	
+
+</h:head>
+<body>
+<div class ="left-menu">
+<ui:include src="welcome.xhtml"/>
+</div>
+<div class ="body-menu">
+				<!--  GESTION DE MATERIAS -->
+                <div class="panel panel-default">
+                    <div class="panel-heading"><h3 class="panel-title">Modificar Materia</h3></div>
+                    <div class="panel-body">
+                    
+                    <h:form styleClass="form-inline" id="guardarMateria" method="post">
+							<div class="form-group">
+								<h:outputLabel for="nombre">
+									Nombre de la materia
+									<h:inputText value="#{datosMateriasBean.nombreMateria}" class="form-control" id="nombre"></h:inputText>
+								</h:outputLabel>
+								<div class="form-group">
+									<h:selectOneMenu value="#{datosMateriasBean.idDocente}" name="id" target="#{datosMateriasBean.idDocente}" class="form-control">
+						        		<f:selectItem itemValue="#{datosMateriasBean.idDocente}" itemLabel="#{datosMateriasBean.docente}" />
+						           		<f:selectItems value="#{usuarioBean.profesores}" var="prof" itemLabel="#{prof.nombre} #{prof.apellido}" itemValue="#{prof.id}"/>
+									</h:selectOneMenu>	
+								</div>		
+							</div>
+							<input type="hidden" name="idMateria" value="#{datosMateriasBean.idMateria}" />			
+							<h:commandLink action="#{datosMateriasBean.actualizarMateria()}" styleClass="btn btn-success" value="Actualizar Materia" >
+							</h:commandLink>
+					</h:form>
+                    </div>
+                </div>
+
+</div>
+                
+               
+       
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </body>
+</html>

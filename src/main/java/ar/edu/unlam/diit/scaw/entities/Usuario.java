@@ -14,6 +14,8 @@ public class Usuario implements Serializable {
 	private String nombre;
 	private List<Integer> idRol;
 	
+	
+
 	public Usuario() {
 	}
 

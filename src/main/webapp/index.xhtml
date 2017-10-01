@@ -6,52 +6,51 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui"
-	>
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
 
 <h:head>
 	<title>UNLAM - Sistema de evaluación</title>
+	
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+	<link rel="stylesheet" type="text/css" href="css/styles.css" />
+	<script type="text/javascript" src="js/welcome.js"></script>
+	<!-- <script type="text/javascript" src="js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+	 	<script type="text/javascript" src="js/validation.js"></script> -->
 </h:head>
 
 <h:body>
+
 <div class = "container">
-	<h3>UNLAM - Sistema de evaluación</h3>
-		<div id="loginbox">
-			<div>
-				 <div>
-            		 <div>Iniciar Sesion</div>
-             	</div>
-             <div>
+	
+		<div id="loginbox" class="login mainbox col-md-6 col-md-offset-3 col-sm-8" style="margin-top: 15%;">
+ 
              <h:form id="login">
-				<div>
-					<span>Email: </span>
-					<h:inputText value="#{usuarioBean.email}" id="eMail" p:placeholder="Ingrese Email"></h:inputText>
+				<div class="form-group">
+					<label for="usr">Email</label>					
+					<h:inputText styleClass ="form-control" value="#{usuarioBean.email}" id="eMail" p:placeholder="Ingrese Email"></h:inputText>
 				</div>
-				<div>
-					<span>Contraseña: </span>
-					<h:inputSecret value="#{usuarioBean.contraseña}" id="contraseña" p:placeholder="Ingrese Contraseña"></h:inputSecret>
+				<div  class="form-group">
+					<label for="usr">Password</label>					
+					<h:inputSecret styleClass ="form-control" value="#{usuarioBean.contraseña}" id="contraseña" p:placeholder="Ingrese Contraseña"></h:inputSecret>
 				</div>
-				<div>
-					<div>
-						<h:commandButton action="#{usuarioBean.login}" value="Ingresar">
+				<div  class="login-btn form-group">
+					<div class="col-sm-12 controls text-right">
+						<h:commandButton styleClass="btn btn-info" action="#{usuarioBean.login}" value="Ingresar">
 						</h:commandButton>
+						 <h:commandLink action="#{usuarioBean.registro}">
+                    	    <h:outputText value ="Registrarse"></h:outputText>
+                    	    <f:param name="opc" value = "3"></f:param>
+                    	 	<f:param name ="idUsuario" value ="#{usuarioBean.id}"></f:param>
+                    	 </h:commandLink>
 					</div>
 				</div>
 				
-				<div>
-                 	<div>
-                    	 <div>
-                       	       <h:commandLink action="#{usuarioBean.registro}">
-                       	       		<h:outputText value ="Registrarse"></h:outputText>
-                       	       </h:commandLink>
-                         </div>
-                     </div>
-                </div>
+				
                   
 			</h:form>
 		</div>
-	</div>
 </div>
-</div>	
+	
 </h:body>
 </html>

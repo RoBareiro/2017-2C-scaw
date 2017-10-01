@@ -7,6 +7,7 @@ public class DatosMaterias {
 	private String descripcion;
 	private String docente;
 	private Integer idEstadoMateria;
+	private Integer idDocente;
 	
 	public Integer getIdMateria() {
 		return idMateria;
@@ -37,6 +38,12 @@ public class DatosMaterias {
 	}
 	public void setIdEstadoMateria(Integer idEstadoMateria) {
 		this.idEstadoMateria = idEstadoMateria;
+	}
+	public Integer getIdDocente() {
+		return idDocente;
+	}
+	public void setIdDocente(Integer idDocente) {
+		this.idDocente = idDocente;
 	}
 	
 

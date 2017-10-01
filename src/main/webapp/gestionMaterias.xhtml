@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	>
+<h:head>
+        <title>Panel de Adminsitracion</title>
+	<link rel="stylesheet" type="text/css" href="css/table-style.css" />
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+	<link rel="stylesheet" type="text/css" href="css/styles.css" />
+	<link rel="stylesheet" type="text/css" href="css/index.css" />
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"/>
+	
+	
+	<script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/welcome.js"></script>
+</h:head>
+<body>
+<div class ="left-menu">
+<ui:include src="welcome.xhtml"/>
+</div>
+     <div class="body-menu">
+     	<div class="panel panel-default">
+			<div class="panel-heading"><h3 class="panel-title">Gestion de Materias</h3></div>
+				<div class="panel-body">
+                	<h:dataTable value="#{materiaBean.getAllMaterias()}" var="dato" styleClass="table table-hover">        	
+						<h:column>
+							<f:facet name="header">Materia</f:facet>    				
+					      		#{dato.nombreMateria}
+					  	</h:column>
+                        <h:column>
+							<f:facet name="header" >Docente Asignado</f:facet>
+					      		#{dato.docente}
+						</h:column>   		
+						<h:column>
+							<f:facet name="header" >Estado Materia</f:facet>
+								<ui:fragment rendered="#{dato.idEstadoMateria == 1}">
+									<h:form id="deshabilitar">
+										<input type="hidden" name="idMateria" value="#{dato.idMateria}" />
+										<h:commandButton styleClass="btn btn-success" action="#{materiaBean.deshabilitar}" value="#{dato.descripcion}" >
+											<f:param name ="id" value ="#{usuarioBean.idUser}"></f:param>
+											<f:ajax execute="idMateria">
+											</f:ajax>
+										</h:commandButton>
+									</h:form>
+								</ui:fragment>
+					      		<ui:fragment rendered="#{dato.idEstadoMateria == 2}">
+						      		<h:form id="habilitar">
+						      			<input type="hidden" name="idMateria" value="#{dato.idMateria}" />
+							      			<h:commandButton styleClass="btn btn-danger" action="#{materiaBean.habilitar}" value="#{dato.descripcion}" >
+							      				<f:param name ="idUsuario" value ="#{usuarioBean.id}"></f:param>
+							      				<f:param name ="id" value ="#{usuarioBean.idUser}"></f:param>
+												<f:ajax execute="idMateria">
+												</f:ajax>
+							      			</h:commandButton>
+						      		</h:form>
+						      	</ui:fragment>
+						   </h:column>		
+						   	<h:column>
+								<f:facet name="header">Accion</f:facet>
+									<h:form id="editar">
+										<input type="hidden" name="idMateria" value="#{dato.idMateria}" />
+										<input type="hidden" name="idDocente" value="#{dato.idDocente}" />
+							      		<h:commandButton styleClass="btn btn-warning" action="#{datosMateriasBean.editar()}" value="Modificar Materia" >
+							      			<f:param name ="idUsuario" value ="#{usuarioBean.idUser}"></f:param>
+							      		</h:commandButton>
+						   			</h:form>
+							</h:column> 
+						   		                                             
+                    </h:dataTable>
+                    <h:form>
+                        	<h:commandLink action="#{usuarioBean.nuevaMateria}" styleClass="btn btn-success btn-block">
+                        	       			<h:outputText value ="Agregar nueva Materia"></h:outputText>
+                        	       			<f:param name ="idUsuario" value ="#{usuarioBean.idUser}"></f:param>
+                        	</h:commandLink>
+                     </h:form>
+                    </div>
+                </div>
+     
+	</div>
+</body>
+</html>

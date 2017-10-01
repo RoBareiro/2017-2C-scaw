@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<%@taglib prefix="h" uri="http://java.sun.com/jsf/html"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -11,16 +10,33 @@
 	>
 <h:head>
         <title>Panel de Adminsitracion</title>
-        <!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" type="text/css" href="css/table-style.css" />
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+	<link rel="stylesheet" type="text/css" href="css/styles.css" />
+	<link rel="stylesheet" type="text/css" href="css/index.css" />
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"/>
+	
+	
+	<script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/welcome.js"></script>
 </h:head>
 <body>
-        <div>
-            <div>
-                <div>
-                    <div><h3>Altas Pendientes</h3></div>
-                    <div>
-                    <table>
-						<h:dataTable value="#{usuarioBean.getFindPend()}" var="usuario">
+<div class ="left-menu">
+<ui:include src="welcome.xhtml"/>
+</div>
+     <div class="body-menu">
+     
+            <div class="row">
+                <div class="panel panel-default">
+                    <div class="panel-heading"><h3 class="panel-title">Altas Pendientes</h3></div>
+                    <div class="panel-body">
+                    <table class="table table-hover text-center">
+						<h:dataTable value="#{usuarioBean.getFindPend()}" var="usuario"
+							class="table table-hover" headerClass="order-table-header"
+							rowClasses="order-table-odd-row,order-table-even-row">
 
 							<h:column>
 								<f:facet name="header">Nombre</f:facet>    				
@@ -59,10 +75,10 @@
                     </div>
                 </div>
 				<!--  GESTION DE MATERIAS -->
-                <div>
-                    <div><h3>Gestion de Materias</h3></div>
-                    <div>
-                            <h:dataTable value="#{materiaBean.getAllMaterias()}" var="dato" >
+                <div class="panel panel-default">
+                    <div class="panel-heading"><h3 class="panel-title">Gestion de Materias</h3></div>
+                    <div class="panel-body">
+                            <h:dataTable value="#{materiaBean.getAllMaterias()}" var="dato" styleClass="table table-hover">
                             	
                             	<h:column>
 									<f:facet name="header">Materia</f:facet>    				
@@ -80,38 +96,39 @@
 							      	<ui:fragment rendered="#{dato.idEstadoMateria == 1}">
 							      		<h:form id="deshabilitar">
 							      			<input type="hidden" name="idMateria" value="#{dato.idMateria}" />
-							      			<h:commandButton action="#{materiaBean.deshabilitar()}" value="#{dato.descripcion}" ></h:commandButton>
+							      			
+							      			<h:commandButton styleClass="btn btn-success" action="#{materiaBean.deshabilitar()}" value="#{dato.descripcion}" ></h:commandButton>
 							      		</h:form>
 							      	</ui:fragment>
 							      							      	
 							      	<ui:fragment rendered="#{dato.idEstadoMateria == 2}">
 							      		<h:form id="habilitar">
 							      			<input type="hidden" name="idMateria" value="#{dato.idMateria}" />
-							      			<h:commandButton action="#{materiaBean.habilitar()}" value="#{dato.descripcion}" ></h:commandButton>
+							      			<h:commandButton styleClass="btn btn-danger" action="#{materiaBean.habilitar()}" value="#{dato.descripcion}" ></h:commandButton>
 							      		</h:form>
 							      	</ui:fragment>
 
-									
-									
-									 
-					    	  		
 						   		</h:column>
 						   		
 						   		<h:column>
 									<f:facet name="header">Accion</f:facet>
-					    	  		<button type="button"><span></span> Modificar</button>
+									<h:form id="editar">
+										<input type="hidden" name="idMateria" value="#{dato.idMateria}" />
+										<input type="hidden" name="idDocente" value="#{dato.idDocente}" />
+							      		<h:commandButton styleClass="btn btn-warning" action="#{datosMateriasBean.editar()}" value="Modificar Materia" ></h:commandButton>
+						   			</h:form>
 						   		</h:column> 
 						   		                                             
                         	</h:dataTable>
-                        	<h:link value="Agregar nueva Materia" outcome="#{materiaBean.nuevaMateria()}" />
+                        	<h:link value="Agregar nueva Materia" outcome="#{materiaBean.nuevaMateria()}" styleClass="btn btn-success btn-block" />
                     </div>
                 </div>
                 
                 
-                <div>
-                    <div><h3>Usuarios registrados Activos</h3></div>
-                    <div>
-                        <h:dataTable value="#{usuarioBean.findAll}" var="usuario">
+                <div class="panel panel-default">
+                    <div class="panel-heading"><h3 class="panel-title">Usuarios registrados Activos</h3></div>
+                    <div class="panel-body">
+                        <h:dataTable value="#{usuarioBean.findAll}" var="usuario" class="table table-hover">
                             	<h:column>
 									<f:facet name="header">Nombre y Apellido</f:facet>    				
 					      			#{usuario.nombre} #{usuario.apellido}
@@ -124,17 +141,28 @@
 						   		
 						   		<h:column>
 									<f:facet name="header">Accion</f:facet>
-					    	  		<button type="button"><span></span></button>
+					    	  		
 					    	  		<h:form>
-                                    	<h:commandButton action="#{usuarioBean.consultarUsuario}" value="Ver Usuario">
+					    	  			<h:commandButton styleClass="btn btn-warning" action="#{usuarioBean.editarUsuario}" value="Modificar Usuario">
+                                    			<f:param name ="idUsuario" value ="#{usuario.id}"></f:param>
+										</h:commandButton>
+                                    	<h:commandButton styleClass="btn btn-warning" action="#{usuarioBean.consultarUsuario}" value="Consultar Usuario">
                                     			<f:param name ="idUsuario" value ="#{usuario.id}"></f:param>
 										</h:commandButton>
 									</h:form>
-						   		</h:column>              
+						   		</h:column>
+							
+
+                                                
                         </h:dataTable>
                     </div>
-                </div>     	
+                </div>
+                
+                	
             </div>
         </div>
+       
+
+    
     </body>
 </html>

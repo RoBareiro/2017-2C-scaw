@@ -5,42 +5,62 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
-	
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
 <h:head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<title>UNLAM - Registro de usuario</title>
-
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Registrar usuario</title>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+	<link rel="stylesheet" type="text/css" href="css/styles.css" />
 </h:head>
 
 <h:body>
-
-	<div>
-		<h:form>
-			<h3>UNLAM - Registro de usuarios</h3>
-
-			<h:panelGrid columns="3">
-				<div>
-					<h:outputLabel for="nombre">Nombre:</h:outputLabel>
-					<h:inputText value="#{usuarioBean.nombre}" id="nombre"></h:inputText>
+<div class="container">
+		
+		<div id="loginbox" class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+		
+		<div class="row text-center">
+			<h4>Registrar usuario</h4>
+		</div>
+		
+             
+             <h:form id="login" class="clearfix">
+     
+     
+             <div class="form-group">
+				<h:selectOneMenu value="#{usuarioBean.idRol}" name="idrol" target="#{usuarioBean.idRol}" class="form-control">
+        			<f:selectItem itemValue="#{null}" itemLabel="Elegir rol de usuario" />
+            		<f:selectItems value="#{usuarioBean.roles}" var="rol" itemLabel="#{rol.descripcion}" itemValue="#{rol.id}"/>
+				</h:selectOneMenu>
+			</div>
+             <div class="form-group">
+					<label for="nombre">Nombre</label>	
+					<h:inputText styleClass ="form-control" value="#{usuarioBean.nombre}" id="nombre" p:placeholder="Ingrese nombre"></h:inputText>
 				</div>
-				<div>
-					<h:outputLabel for="apellido">Apellido:</h:outputLabel>
-					<h:inputText value="#{usuarioBean.apellido}" id="apellido"></h:inputText>
+				<div class="form-group">
+					<label for="apellido">Apellido</label>	
+					<h:inputText styleClass ="form-control" value="#{usuarioBean.apellido}" id="apellido" p:placeholder="Ingrese apellido"></h:inputText>
 				</div>
-				<div>
-					<h:outputLabel for="eMail">E-Mail:</h:outputLabel>
-					<h:inputText value="#{usuarioBean.email}" id="eMail"></h:inputText>
+				<div class="form-group">
+					<label for="eMail">Email</label>		
+					<h:inputText styleClass ="form-control" value="#{usuarioBean.eMail}" id="eMail" p:placeholder="Ingrese email"></h:inputText>
 				</div>
-				<div>
-					<h:outputLabel for="contraseña">Contraseña:</h:outputLabel>
-					<h:inputSecret value="#{usuarioBean.contraseña}" id="contraseña"></h:inputSecret>
+				<div  class="form-group">
+					<label for="password">Password</label>
+					<h:inputSecret styleClass ="form-control" value="#{usuarioBean.contraseña}" id="contraseña" p:placeholder="Ingrese Contraseña"></h:inputSecret>
 				</div>
-				<h:commandButton action="#{usuarioBean.save}" value="Ingresar">
-				</h:commandButton>
-			</h:panelGrid>
-		</h:form>
-	</div>
+				<div  class="login-btn form-group">
+					<div class="col-sm-12 controls">
+		 				<h:commandButton action="#{usuarioBean.save}" class="btn btn-info" value="Registrar"> </h:commandButton>
+		 				<h:commandLink action="#{usuarioBean.login}">
+                          <h:outputText value ="Iniciar sesi&oacute;n"></h:outputText>
+                        </h:commandLink>
+					</div>
+				</div>
+                  
+			</h:form>
+		</div>
+</div>
 </h:body>
 
 </html>

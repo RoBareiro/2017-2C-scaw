@@ -4,14 +4,13 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 import java.sql.Statement;
 
 import ar.edu.unlam.diit.scaw.configs.HsqlDataSource;
 import ar.edu.unlam.diit.scaw.daos.UsuarioDao;
+import ar.edu.unlam.diit.scaw.entities.Rol;
 import ar.edu.unlam.diit.scaw.entities.Usuario;
 
 public class UsuarioDaoImpl implements UsuarioDao {
@@ -29,10 +28,10 @@ public class UsuarioDaoImpl implements UsuarioDao {
 			
 			String sql = "SELECT * FROM Usuarios U "
 					+ "INNER JOIN ROLESUSUARIOS RU " 
-					+ "ON U.ID = RU.IDUSUARIO "
-					+ "WHERE U.eMail = "+ usuario.getEmail() +
-					" AND U.contraseña = "+ usuario.getContraseña() +
-					" AND U.idEstadoUsuario = 2";
+					+ " ON  U.ID = RU.IDUSUARIO "
+					+ " WHERE U.eMail = '"+ usuario.getEmail() +
+					"' AND U.contraseña = '"+ usuario.getContraseña() +
+					"' AND U.idEstadoUsuario = 2";
 			ResultSet rs = query.executeQuery(sql);
 			while(rs.next()){
 				String eMail = rs.getString("eMail");
@@ -50,9 +49,7 @@ public class UsuarioDaoImpl implements UsuarioDao {
 				logueado.setNombre(nombre);
 				roles.add(idRol);
 				logueado.setIdRol(roles);
-				
 			}
-			logueado.setIdRol(roles);
 			conn.close();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -99,34 +96,54 @@ public class UsuarioDaoImpl implements UsuarioDao {
 	}
 	
 	@Override
-	public void save(Usuario usuario) {
+	public void save(Usuario usuario, Integer idRol) {
 
 		try {
-			conn = (dataSource.dataSource()).getConnection();
-		
-			Statement query;
+			Integer lastid = null;
 			
-			query = conn.createStatement();
+			conn = (dataSource.dataSource()).getConnection();
+	        Statement stmt = conn.createStatement();
+			
 			//OBTENGO EL ID DEL ULTIMO USUARIO
-			ResultSet rs = query.executeQuery("select id from usuarios order by id desc limit 1"); 
+			ResultSet rs = stmt.executeQuery("select id from usuarios order by id desc limit 1"); 
 			
 			while(rs.next()){
 				//AL OBTENER EL ID LE SUMO 1 YA QUE DEBE SER EL PROXIMO USUARIO
-				usuario.setId(rs.getInt("id") + 1);
+				lastid = rs.getInt("id") + 1;
+				usuario.setId(lastid);
+				
 			}
-			//SE GUARDA EL USUARIO
-			query.executeUpdate("INSERT INTO Usuarios VALUES(" + usuario.getId() + ", '" + usuario.getEmail() + "', '" + usuario.getContraseña() + "', '" + usuario.getApellido()+ "', '" + usuario.getNombre() + "', 1);");
-						
-			conn.close();
+			
+			if(lastid != 0){
+				
+				//SE GUARDA EL USUARIO (NULL PORQUE ES IDENTITY)
+		        String query = "INSERT INTO Usuarios VALUES(" + usuario.getId() + ",'" + usuario.getEmail() + "', '" + usuario.getContraseña() + "', '" + usuario.getApellido()+ "', '" + usuario.getNombre() + "',1);";
+				System.out.println(query);
+		        
+		        //SE EJECUTA DICHA QUERY
+		        stmt.executeUpdate(query);
+				//SE GUARDA LA RELACION ENTRE EL USUARIO Y EL ROL
+				String queryrol = "Insert into rolesusuarios values(" + lastid + "," + idRol + ");"; 
+				System.out.println(queryrol);
+	
+				//SE EJECUTA DICHA QUERY
+				stmt.executeUpdate(queryrol);
+				//CIERRO LA CONEXION
+				conn.close();
+			} else {
+				
+				throw new SQLException("Fallo al crear usuario");
+			
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}		
 	}
 	
 	@Override
-	public Map<Integer,String> getRoles(){
+	public List<Rol> getRoles(){
 		
-		Map<Integer,String> roles = new HashMap<Integer, String>();;
+		List<Rol> roles = new ArrayList<Rol>();
 		
 		try{
 			conn =(dataSource.dataSource().getConnection());
@@ -136,8 +153,10 @@ public class UsuarioDaoImpl implements UsuarioDao {
 			ResultSet rs = query.executeQuery("SELECT * FROM Roles");
 			
 			while(rs.next()){
-				
-				roles.put(rs.getInt("id"),rs.getString("descripcion"));
+				Rol rol = new Rol();
+				rol.setId(rs.getInt("id"));
+				rol.setDescripcion(rs.getString("descripcion"));
+				roles.add(rol);
 			}
 			conn.close();
 			
@@ -242,6 +261,63 @@ public class UsuarioDaoImpl implements UsuarioDao {
 			e.printStackTrace();
 		}
 		return usuario;
+	}
+
+	public List<Usuario> getAllProfesores() {
+	
+		List<Usuario> profs = new ArrayList<Usuario>();
+		
+		try{
+			conn = (dataSource.dataSource()).getConnection();
+			Statement stmt = conn.createStatement();
+		
+			String query = "select u.id as id, u.nombre as nombre, u.apellido as apellido from usuarios as u join rolesusuarios as ru on u.id = ru.idusuario where ru.idrol = 2;";
+			ResultSet rs = stmt.executeQuery(query);
+			
+			
+			while(rs.next()){
+				
+				Usuario usuario = new Usuario();
+				
+				usuario.setId(rs.getInt("id"));
+				usuario.setNombre(rs.getString("nombre"));
+				usuario.setApellido(rs.getString("apellido"));
+			
+				System.out.println("id:" + usuario.getId() + "//Nombre: " + usuario.getNombre() + " /AP: " + usuario.getApellido());
+				profs.add(usuario);
+			
+			}
+			return profs;
+			
+		}catch(Exception e){
+
+			e.printStackTrace();			
+		}
+		return profs;
+	}
+	
+	@Override
+	public void updateUsuario(Integer id,String mail, String contraseña,String apellido,String nombre){
+		try {
+			conn = (dataSource.dataSource()).getConnection();
+		
+			Statement query;
+			
+			String sql = "UPDATE Usuarios SET "
+					+ " eMail = '" 		+ mail + "', " 
+					+ " contraseña = '"  +  contraseña + "', " 
+					+ " apellido = '" 	+ 	apellido + "', "
+            		+ "	nombre = '"   	+	nombre + "'" 
+					+ " WHERE id = " 	+ id;
+			 	 	
+
+			query = conn.createStatement();		
+			query.executeUpdate(sql);
+						
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 }

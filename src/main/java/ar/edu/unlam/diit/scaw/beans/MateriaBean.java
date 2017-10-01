@@ -5,12 +5,15 @@ import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 
 import ar.edu.unlam.diit.scaw.entities.DatosMaterias;
 import ar.edu.unlam.diit.scaw.entities.Materia;
 import ar.edu.unlam.diit.scaw.services.MateriaService;
+import ar.edu.unlam.diit.scaw.services.UsuarioService;
 import ar.edu.unlam.diit.scaw.services.impl.MateriaServiceImpl;
+import ar.edu.unlam.diit.scaw.services.impl.UsuarioServiceImpl;
 
 @ManagedBean(name = "materiaBean", eager = true)
 @RequestScoped
@@ -22,12 +25,21 @@ public class MateriaBean implements Serializable {
 	private String nombre = null;
 	private Integer idDocenteTitular = null;
 	private Integer idEstadoMateria = null;
+	private String idMateriaString =  null;
+	private String error = null;
+	
+	
+	
+	@ManagedProperty("#{param.idUsuario}")
+	private Integer idUsuario = null;
 	
 	MateriaService servicioMateria;
+	UsuarioService servicioUsuario;
 	
 	public MateriaBean(){
 		super();
-		servicioMateria = (MateriaService) new MateriaServiceImpl(); 
+		servicioMateria = (MateriaService) new MateriaServiceImpl();
+		servicioUsuario = (UsuarioService) new UsuarioServiceImpl();
 		
 	}
 	
@@ -44,30 +56,30 @@ public class MateriaBean implements Serializable {
 		return lista;	
 	}
 	
-	public String nuevaMateria(){
-			return "nuevaMateria";
-	}
 		 	
 	public String guardarMateria(){
 		Materia materia = new Materia();
 		materia.setNombre(getNombre());
+		materia.setIdDocenteTitular(this.idDocenteTitular);
 		servicioMateria.guardarMateria(materia);
-		return "admin";
+		return "welcome";
 	}
 	
 	public String deshabilitar(){
 		String valor = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("idMateria");
 
 		servicioMateria.deshabilitarMateria(valor);
-		return "admin";
+		return "welcome";
 	}
 	
 	public String habilitar(){
 		String valor = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("idMateria");
 
 		servicioMateria.habilitarMateria(valor);
-		return "admin";
+		return "welcome";
 	}
+	
+	
 		
 	public Integer getId() {
 		return id;
@@ -104,6 +116,29 @@ public class MateriaBean implements Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public String getIdMateriaString() {
+		return idMateriaString;
+	}
+
+	public void setIdMateriaString(String idMateriaString) {
+		this.idMateriaString = idMateriaString;
+	}
+
+	public String getError() {
+		return error;
+	}
+
+	public void setError(String error) {
+		this.error = error;
+	}
+	public Integer getIdUsuario() {
+		return idUsuario;
+	}
+
+	public void setIdUsuario(Integer idUsuario) {
+		this.idUsuario = idUsuario;
 	}
 	
 	

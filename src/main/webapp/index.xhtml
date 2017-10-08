@@ -22,34 +22,47 @@
 <h:body>
 
 <div class = "container">
-	
-		<div id="loginbox" class="login mainbox col-md-6 col-md-offset-3 col-sm-8" style="margin-top: 15%;">
- 
+	<h3 class="text-center">UNLAM - Sistema de evaluación</h3>
+		<div id="loginbox" class="login mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+			<div class="panel panel-info" >
+				 <div class="panel-heading">
+            		 <div class="panel-title">Iniciar Sesion</div>
+                		 
+             	</div>
+             <div class="loggin-body panel-body" >
              <h:form id="login">
-				<div class="form-group">
-					<label for="usr">Email</label>					
+				<div class=" login-input input-group">
+					<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
 					<h:inputText styleClass ="form-control" value="#{usuarioBean.email}" id="eMail" p:placeholder="Ingrese Email"></h:inputText>
 				</div>
-				<div  class="form-group">
-					<label for="usr">Password</label>					
+				<div  class=" login-input input-group">
+					<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
 					<h:inputSecret styleClass ="form-control" value="#{usuarioBean.contraseña}" id="contraseña" p:placeholder="Ingrese Contraseña"></h:inputSecret>
 				</div>
 				<div  class="login-btn form-group">
-					<div class="col-sm-12 controls text-right">
-						<h:commandButton styleClass="btn btn-info" action="#{usuarioBean.login}" value="Ingresar">
+					<div class="col-sm-12 controls">
+						<h:commandButton styleClass="btn btn-success" action="#{usuarioBean.login}" value="Ingresar">
 						</h:commandButton>
-						 <h:commandLink action="#{usuarioBean.registro}">
-                    	    <h:outputText value ="Registrarse"></h:outputText>
-                    	    <f:param name="opc" value = "3"></f:param>
-                    	 	<f:param name ="idUsuario" value ="#{usuarioBean.id}"></f:param>
-                    	 </h:commandLink>
 					</div>
 				</div>
 				
-				
+				<div class="form-group">
+                 	<div class="col-md-12 control">
+                    	 <div  class="login-registrar" >
+                               Todavia no tienes cuenta?
+                        	       <h:commandLink action="#{usuarioBean.registro}">
+                        	       		<h:outputText value ="Registrate aqui!"></h:outputText>
+                        	       		<f:param name="opc" value = "3"></f:param>
+                        	       		<f:param name ="idUsuario" value ="#{usuarioBean.id}"></f:param>
+                        	       </h:commandLink>
+                         </div>
+                     </div>
+                </div>
                   
 			</h:form>
 		</div>
+	</div>
+</div>
 </div>
 	
 </h:body>

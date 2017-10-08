@@ -68,7 +68,7 @@
 }
 .nav-side-menu ul .sub-menu li,
 .nav-side-menu li .sub-menu li {
-  background-color: #181c20;
+  background-color: #0080c0;
   border: none;
   line-height: 28px;
   border-bottom: 1px solid #23282e;
@@ -76,7 +76,7 @@
 }
 .nav-side-menu ul .sub-menu li:hover,
 .nav-side-menu li .sub-menu li:hover {
-  background-color: #020203;
+  background-color: #004080;
 }
 .nav-side-menu ul .sub-menu li:before,
 .nav-side-menu li .sub-menu li:before {
@@ -139,6 +139,7 @@
 @media (min-width: 767px) {
   .nav-side-menu .menu-list .menu-content {
     display: block;
+    background: #0080c0;
   }
 }
 body {

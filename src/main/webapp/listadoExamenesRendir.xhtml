@@ -25,7 +25,7 @@
 				<div class="panel panel-default">
                     <div class="panel-body">
 						<h:form>
-							<h:dataTable value="#{examenBean.allExamenes}" var="gestionExamen" class="table table-hover" headerClass="order-table-header"
+							<h:dataTable value="#{examenBean.allExamenesActivos}" var="gestionExamen" class="table table-hover" headerClass="order-table-header"
 							 rowClasses="order-table-odd-row,order-table-even-row">
 								
 								<h:column>
@@ -38,27 +38,16 @@
 									#{gestionExamen.materia.nombre}
 								</h:column>
 
-								<h:column>
-									<f:facet name="header">Estado del examen</f:facet>
-									#{gestionExamen.estadosExamenes}
-								</h:column>
                                  
 								<h:column>
 									<f:facet name="header">Accion</f:facet>
-					    	  		<h:commandButton action="#{examenBean.editarExamen}" class="btn btn-success" value="Modificar">
-
-	                				</h:commandButton>
-                                    <h:commandButton action="#{examenBean.deshabilitarExamen}" style="margin-left:5px" class="btn btn-danger" value="Deshabilitar">
-
-	                				</h:commandButton>
+					    	  		<h:commandButton action="#{examenBean.rendirExamen}" class="btn btn-success" value="Rendir">
+					    	  		</h:commandButton>
+					    	  		
 						   		</h:column> 
 
 							</h:dataTable>
-                           
-                        	<h:commandLink action="#{usuarioBean.nuevoExamen}" styleClass="btn btn-success btn-block">
-                        	       			<h:outputText value ="Agregar nuevo Examen"></h:outputText>
-                        	       			<f:param name ="idUsuario" value ="#{usuarioBean.idUser}"></f:param>
-                        	</h:commandLink>
+
                      </h:form>
 					</div>
 					

@@ -1,6 +1,7 @@
 package ar.edu.unlam.diit.scaw.entities;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Examenes implements Serializable{
 
@@ -9,8 +10,17 @@ public class Examenes implements Serializable{
 	private String nombre;
 	private Integer idMateria;
 	private Integer idEstadoExamen;
+	private Materia materia;
+	private String estadosExamenes;
+	private List<Preguntas> preguntas;
 	
 	
+	public List<Preguntas> getPreguntas() {
+		return preguntas;
+	}
+	public void setPreguntas(List<Preguntas> preguntas) {
+		this.preguntas = preguntas;
+	}
 	public Integer getId() {
 		return id;
 	}
@@ -37,6 +47,18 @@ public class Examenes implements Serializable{
 	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+	public Materia getMateria() {
+		return materia;
+	}
+	public void setMateria(Materia materia) {
+		this.materia = materia;
+	}
+	public String getEstadosExamenes() {
+		return estadosExamenes;
+	}
+	public void setEstadosExamenes(String estadosExamenes) {
+		this.estadosExamenes = estadosExamenes;
 	}
 	
 	

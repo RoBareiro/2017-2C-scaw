@@ -23,6 +23,7 @@ public class DatosMateriasBean implements Serializable {
 	private Integer idDocente = null;
 	private Integer idEstadoMateria = null;
 	private String idMateriaString = null;
+	private String mensaje = null;
 	
 	MateriaService servicioMateria;
 	
@@ -52,10 +53,15 @@ public class DatosMateriasBean implements Serializable {
 		
 		Integer idDocente = this.idDocente;
 		Integer idMateria = Integer.parseInt(materiaForm);
+		try{
+			servicioMateria.actualizarMateria(idMateria, idDocente, materiaNombreForm);
+			mensaje ="materia actualizada correctamente";
+			return "gestionMaterias";	
+		}catch(Exception e){
+			mensaje = e.getMessage();
+			return "gestionMaterias";
+		}
 		
-		servicioMateria.actualizarMateria(idMateria, idDocente, materiaNombreForm);
-		
-		return "welcome";
 	}
 	
 	public Integer getIdMateria() {
@@ -112,6 +118,14 @@ public class DatosMateriasBean implements Serializable {
 
 	public void setIdDocente(Integer idDocente) {
 		this.idDocente = idDocente;
+	}
+
+	public String getMensaje() {
+		return mensaje;
+	}
+
+	public void setMensaje(String mensaje) {
+		this.mensaje = mensaje;
 	}
 	
 	

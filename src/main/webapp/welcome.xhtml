@@ -26,7 +26,7 @@
 	<h3 class="text-center">Bienvenido a UNLAM - Sistema de evaluación</h3>
 	
 <div class="nav-side-menu">
-	<div class="brand">Panel de Usuario</div>
+	<div class="brand">Panel de Usuario2</div>
 		<h:form id="myForm">
  			 
 			<h:inputHidden value="#{sessionScope.all}"   id="grantAll" />
@@ -38,7 +38,7 @@
 				<ul class ="menu-content collapse out">
 					<li>
 						<h:commandLink action="#{usuarioBean.admin}">
-							<h:outputText value ="Perfil"></h:outputText>
+							<h:outputText value ="Bienvenido #{sessionScope.nomUsu}"></h:outputText>
 							<f:param name ="idUsuario" value ="#{usuario.id}"></f:param>
 						</h:commandLink>
 					</li>
@@ -75,7 +75,12 @@
 								<f:param name ="idUsuario" value ="#{usuarioBean.idUser}"></f:param>
 							</h:commandLink>
 						</li>
-						
+						<li>
+							<h:commandLink action="#{examenBean.listarRendirExamen}">
+								<h:outputText value ="Rendir Examen"></h:outputText>
+								<f:param name ="idUsuario" value ="#{usuarioBean.id}"></f:param>
+							</h:commandLink>
+						</li>
 					</ul>
 					<li id="aluLI" data-toggle="collapse" data-target="#alumno" class="collapsed active">
                   		<a href="#"><i class="fa fa-gift fa-lg"></i> Alumno <span class="arrow"></span></a>
@@ -87,7 +92,12 @@
 								<f:param name ="idUsuario" value ="#{usuarioBean.id}"></f:param>
 							</h:commandLink>
 						</li>
-						
+						<li>
+							<h:commandLink action="#{examenBean.listarRendirExamen}">
+								<h:outputText value ="Rendir Examen"></h:outputText>
+								<f:param name ="idUsuario" value ="#{usuarioBean.id}"></f:param>
+							</h:commandLink>
+						</li>
 					</ul>
 					
 				</ul>

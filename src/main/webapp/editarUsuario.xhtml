@@ -22,6 +22,8 @@
 	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<!-- <script type="text/javascript" src="js/welcome.js"></script>-->
+	
 	
 </h:head>
 <body>
@@ -33,40 +35,64 @@
 	<div class="panel panel-default">
 		<div class="panel-heading"><h3 class="panel-title">Modificar Usuario</h3></div>
         	<div class="panel-body">
-				<h:form styleClass="form-inline" id="actualizarUsuario" method="post">
+				<h:form id="actualizarUsuario" method="post">
 					<h:inputHidden value="#{usuarioBean.id}" id="id" />
+					<h:inputHidden value="#{usuarioBean.tipoAccion}" id="accion" />
+					
 						<div class="form-group">
 							<div class=" login-input input-group">
 								<span class="input-group-addon"><i class="glyphicon glyphicon-education"></i></span>
-								<h:inputText styleClass ="form-control" value="#{usuarioBean.nombre}" id="nombre" h:placeholder="Ingrese nombre"></h:inputText>
+								<h:inputText styleClass ="form-control" value="#{usuarioBean.nombre}" id="nombre" h:placeholder="Ingrese nombre">
+								<!--	<f:ajax event="blur" render="error-nombre" listener="#{usuarioBean.validarNombre}"/> -->
+								</h:inputText>
+							</div>
+							<div class=" login-input input-group">
+								<h:outputText id="error-nombre" styleClass="alert alert-danger"></h:outputText>
 							</div>
 							<div class=" login-input input-group">
 								<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-								<h:inputText styleClass ="form-control" value="#{usuarioBean.apellido}" id="apellido" h:placeholder="Ingrese apellido"></h:inputText>
+								<h:inputText styleClass ="form-control" value="#{usuarioBean.apellido}" id="apellido" h:placeholder="Ingrese apellido">
+									<!--  <f:ajax event="blur" render="error-apellido" listener="#{usuarioBean.validarApellido}"/>-->
+								</h:inputText>
 							</div>
 							<div class=" login-input input-group">
+								<h:outputText id="error-apellido" styleClass="alert alert-danger"></h:outputText>
+							</div>
+							
+							<div class=" login-input input-group">
 								<span class="input-group-addon">@</span>
-								<h:inputText styleClass ="form-control" value="#{usuarioBean.eMail}" id="eMail" h:placeholder="Ingrese email"></h:inputText>
+								<h:inputText styleClass ="form-control" value="#{usuarioBean.eMail}" id="eMail" h:placeholder="Ingrese email">
+								<!--  	<f:ajax event="blur" render="error-mail" listener="#{usuarioBean.validarEmail}"/>-->
+								</h:inputText>
+							</div>
+							<div class=" login-input input-group">
+								<h:outputText id="error-mail" styleClass="alert alert-danger"></h:outputText>
 							</div>
 							<div  class=" login-input input-group">
 								<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-								<h:inputSecret styleClass ="form-control" value="#{usuarioBean.contraseña}" id="contraseña" h:placeholder="Ingrese Contraseña"></h:inputSecret>
+								<h:inputSecret styleClass ="form-control" value="#{usuarioBean.contraseña}" id="pass" h:placeholder="Ingrese Contraseña"></h:inputSecret>
 							</div>
 							<div class=" login-input input-group">
-								<h:selectOneMenu value="#{usuarioBean.idRol}" name="idrol" target="#{usuarioBean.idRol}" class="form-control">
+								<h:outputText id="error-pass" styleClass="alert alert-danger"></h:outputText>
+							</div>
+							<div class=" login-input input-group">
+								<h:selectOneMenu value="#{usuarioBean.idRol}" id ="idRol" name="idrol" target="#{usuarioBean.idRol}" class="form-control">
         							<f:selectItem itemValue="#{null}" itemLabel="Elegir rol de usuario" />
             						<f:selectItems value="#{usuarioBean.roles}" var="rol" itemLabel="#{rol.descripcion}" itemValue="#{rol.id}"/>
 								</h:selectOneMenu>
 							</div>		
 						</div>		
-				<h:commandLink action="#{usuarioBean.actualizarUsuario()}" styleClass="btn btn-success" value="Actualizar Usuario" >
-					<f:param name ="idUsuario" value ="#{usuarioBean.idUser}"></f:param>
-				</h:commandLink>
+						<div class=" login-input input-group">
+							<h:commandLink id="Guardar" action="#{usuarioBean.actualizarUsuario}" styleClass="btn btn-success" value="Actualizar Usuario" >
+							</h:commandLink>
+						</div>
+
 			</h:form>
 		</div>
 	</div>
 
 </div>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/validation.js"></script>
     </body>
 </html>

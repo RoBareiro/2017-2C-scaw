@@ -9,58 +9,98 @@
 	xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-	<title>Registrar usuario</title>
+	<title>UNLAM - Registro de usuario</title>
+	<link rel="stylesheet" type="text/css" href="css/table-style.css" />
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
 	<link rel="stylesheet" type="text/css" href="css/styles.css" />
+	<link rel="stylesheet" type="text/css" href="css/index.css" />
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"/>
+	
+	
+	<script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/welcome.js"></script>
 </h:head>
 
 <h:body>
 <div class="container">
-		
-		<div id="loginbox" class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-		
-		<div class="row text-center">
-			<h4>Registrar usuario</h4>
-		</div>
-		
-             
-             <h:form id="login" class="clearfix">
-     
-     
-             <div class="form-group">
+		<h3 class="text-center">UNLAM - Registro de usuarios</h3>
+		<div id="loginbox" class="login mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+			<div class="panel panel-info" >
+				 <div class="panel-heading">
+            		 <div class="panel-title">Registrarse</div>
+             	</div>
+             <div class="loggin-body panel-body" >
+         <h:form id="actualizarUsuario" class="clearfix">
+     			<h:inputHidden value="#{usuarioBean.tipoAccion}" id="accion" />
+            <div class=" login-input input-group">
 				<h:selectOneMenu value="#{usuarioBean.idRol}" name="idrol" target="#{usuarioBean.idRol}" class="form-control">
         			<f:selectItem itemValue="#{null}" itemLabel="Elegir rol de usuario" />
             		<f:selectItems value="#{usuarioBean.roles}" var="rol" itemLabel="#{rol.descripcion}" itemValue="#{rol.id}"/>
 				</h:selectOneMenu>
 			</div>
-             <div class="form-group">
-					<label for="nombre">Nombre</label>	
+			
+			<div class=" login-input input-group">
+					<h:outputText id="error-rol" styleClass="alert alert-danger"></h:outputText>
+			</div>
+             	<div class=" login-input input-group">
+					<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
 					<h:inputText styleClass ="form-control" value="#{usuarioBean.nombre}" id="nombre" p:placeholder="Ingrese nombre"></h:inputText>
 				</div>
-				<div class="form-group">
-					<label for="apellido">Apellido</label>	
+				<div class=" login-input input-group">
+							<h:outputText id="error-nombre" styleClass="alert alert-danger"></h:outputText>
+				</div>
+				
+				<div class=" login-input input-group">
+					<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
 					<h:inputText styleClass ="form-control" value="#{usuarioBean.apellido}" id="apellido" p:placeholder="Ingrese apellido"></h:inputText>
 				</div>
-				<div class="form-group">
-					<label for="eMail">Email</label>		
+				<div class=" login-input input-group">
+					<h:outputText id="error-apellido" styleClass="alert alert-danger"></h:outputText>
+				</div>
+				
+				<div class=" login-input input-group">
+					<span class="input-group-addon">@</span>
 					<h:inputText styleClass ="form-control" value="#{usuarioBean.eMail}" id="eMail" p:placeholder="Ingrese email"></h:inputText>
 				</div>
-				<div  class="form-group">
-					<label for="password">Password</label>
-					<h:inputSecret styleClass ="form-control" value="#{usuarioBean.contraseña}" id="contraseña" p:placeholder="Ingrese Contraseña"></h:inputSecret>
+				
+				<div class=" login-input input-group">
+					<h:outputText id="error-mail" styleClass="alert alert-danger"></h:outputText>
 				</div>
+				
+				<div  class=" login-input input-group">
+					<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+					<h:inputSecret styleClass ="form-control" value="#{usuarioBean.contraseña}" id="pass" p:placeholder="Ingrese Contraseña"></h:inputSecret>
+				</div>
+				
+				<div class=" login-input input-group">
+					<h:outputText id="error-pass" styleClass="alert alert-danger"></h:outputText>
+				</div>
+				
 				<div  class="login-btn form-group">
 					<div class="col-sm-12 controls">
-		 				<h:commandButton action="#{usuarioBean.save}" class="btn btn-info" value="Registrar"> </h:commandButton>
-		 				<h:commandLink action="#{usuarioBean.login}">
-                          <h:outputText value ="Iniciar sesi&oacute;n"></h:outputText>
-                        </h:commandLink>
+		 				<h:commandLink id="Guardar" action="#{usuarioBean.save}" class="btn btn-success" value="Registrar"> </h:commandLink>
 					</div>
 				</div>
+				
+				<div class="form-group">
+                 	<div class="col-md-12 control">
+                    	 <div  class="login-registrar" >
+                               Ya tienes cuenta?
+                        	       <h:commandLink action="#{usuarioBean.login}">
+                        	       		<h:outputText value ="Inicia sesi&oacute;n!"></h:outputText>
+                        	       </h:commandLink>
+                         </div>
+                     </div>
+                </div>
                   
 			</h:form>
 		</div>
+	</div>
+</div>
 </div>
 </h:body>
-
+<script type="text/javascript" src="js/validation.js"></script>
 </html>

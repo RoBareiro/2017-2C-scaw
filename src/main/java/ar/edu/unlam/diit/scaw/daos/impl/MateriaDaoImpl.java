@@ -1,6 +1,7 @@
 package ar.edu.unlam.diit.scaw.daos.impl;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -64,6 +65,16 @@ public class MateriaDaoImpl implements MateriaDao{
 		try {
 			conn = (dataSource.dataSource()).getConnection();
 		
+			// Creo la consulta SQL
+			PreparedStatement ps = conn.prepareStatement("INSERT INTO Materias (nombre, idDocenteTitular, idEstadoMateria) VALUES(?,?,1)");
+			ps.setString(1, materia.getNombre());
+			ps.setInt(2, materia.getIdDocenteTitular());
+			
+			// Ejecuto la sentencia
+			ps.executeUpdate();
+			ps.close();
+			
+			/*
 			Statement query;
 			
 			query = conn.createStatement();
@@ -71,7 +82,7 @@ public class MateriaDaoImpl implements MateriaDao{
 			String nombre = " '" + materia.getNombre() + "' ";
 			
 			query.executeUpdate("INSERT INTO Materias (nombre, idDocenteTitular, idEstadoMateria) VALUES(" + nombre + "," + materia.getIdDocenteTitular() + ", 1)");  
-			
+			*/
 			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -83,12 +94,14 @@ public class MateriaDaoImpl implements MateriaDao{
 		try {
 			conn = (dataSource.dataSource()).getConnection();
 		
-			Statement query;
-			
-			query = conn.createStatement();
-			
-			
-			query.executeUpdate("UPDATE materias SET idEstadoMateria = 2 WHERE id ='" + id + "'");  
+			// Creo la consulta SQL
+			PreparedStatement ps = conn.prepareStatement("UPDATE materias SET idEstadoMateria = 2 WHERE id = ? ");
+			ps.setString(1, id);
+						
+			// Ejecuto la sentencia
+			ps.executeUpdate();
+			ps.close();
+						  
 			
 			conn.close();
 		} catch (SQLException e) {
@@ -101,12 +114,13 @@ public class MateriaDaoImpl implements MateriaDao{
 		try {
 			conn = (dataSource.dataSource()).getConnection();
 		
-			Statement query;
+			// Creo la consulta SQL
+			PreparedStatement ps = conn.prepareStatement("UPDATE materias SET idEstadoMateria = 1 WHERE id = ? ");
+			ps.setString(1, id);
 			
-			query = conn.createStatement();
-			
-			
-			query.executeUpdate("UPDATE materias SET idEstadoMateria = 1 WHERE id ='" + id + "'");  
+			// Ejecuto la sentencia
+			ps.executeUpdate();
+			ps.close();
 			
 			conn.close();
 		} catch (SQLException e) {
@@ -147,12 +161,18 @@ public class MateriaDaoImpl implements MateriaDao{
 		try {
 			conn = (dataSource.dataSource()).getConnection();
 		
-			Statement query;
+			// Creo la consulta SQL
+			PreparedStatement ps = conn.prepareStatement("UPDATE materias SET nombre = ? , idDocenteTitular = ? WHERE id=? ");
 			
-			query = conn.createStatement();
-						
-			query.executeUpdate("UPDATE materias SET nombre = '" + nombre + "' , idDocenteTitular =" + docente + " WHERE id =" + idMateria + ";");  
+			// Seteo las variables parametrizadas
+			ps.setString(1, nombre);
+			ps.setInt(2, docente);
+			ps.setInt(3, idMateria);
 			
+			// Ejecuto la sentencia
+			ps.executeUpdate();
+			ps.close();
+							    
 			
 			conn.close();
 		} catch (SQLException e) {

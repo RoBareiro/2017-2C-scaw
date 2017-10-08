@@ -8,5 +8,8 @@ public interface ExamenDao {
 	
 	public List<Examenes> getAllExamenes();
 	public void salvarExamen(Examenes examen);
-
+	public void editarExamen(Examenes examen);
+	public Examenes getExamenById(Integer id);
+	public void deshabilitarExamen(Integer id);
+	public List<Examenes> traerExamenActivos();
 }

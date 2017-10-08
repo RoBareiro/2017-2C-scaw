@@ -12,11 +12,6 @@
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet"
 		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
-		<style>
-		.error {
-		color: red;
-		}
-		</style>
 </h:head>
 <body>
 	<div class="container">
@@ -29,7 +24,7 @@
 
 				<div class="panel panel-success">
 					<div class="panel-heading text-center">
-						<h1>ABM EXAMENES2</h1>
+						<h1>Rendir Examen</h1>
 					</div>
 					<div class="panel-body">
 						<div class="col-md-2"></div>
@@ -38,44 +33,26 @@
 							<h:form rendered="true" id="form">
 								<h:inputHidden value="#{examenBean.examenSelected.id}" id="examenId"/>
 								<h2>Nombre del Examen</h2>
-								<h:inputText styleClass="form-control" size="60"
-									value="#{examenBean.nombre}" id="nombreExamen" >
-								</h:inputText>
-								<h:message class="error" for="nombreExamen" />
+								<h:outputLabel value="#{examenBean.nombre}" id="nombreExamen" >
+								</h:outputLabel>
+
 								<h2>Materia</h2>
-								
-								
-								
-								
 								<div class="form-group">
-									<h:selectOneMenu value="#{examenBean.idMateria}" name="id"
-										target="#{examenBean.id}" class="form-control">
-										<f:selectItem itemValue="#{null}"
-											itemLabel="Elegir la materia" />
-										<f:selectItems value="#{materiaBean.allMaterias}" var="mat"
-											itemLabel="#{mat.nombreMateria}" itemValue="#{mat.idMateria}" />
-									</h:selectOneMenu>
+									<h:outputLabel value="#{examenBean.examenSelected.materia.nombre}"  >
+								</h:outputLabel>
 								</div>
-
-								<h2>Estado</h2>
-								<h:selectOneRadio value="#{examenBean.idEstadoExamen}">
-									<f:selectItem itemValue="1" itemLabel="Pendiente" />
-									<f:selectItem itemValue="2" itemLabel="Examen en Curso" />
-									<f:selectItem itemValue="3" itemLabel="Examen Finalizado" />
-								</h:selectOneRadio>
-
 
 								<ui:repeat value="#{examenBean.preguntas}" varStatus="loop">
 								<h2>Pregunta #{loop.index+1}</h2>
-								    <h:inputText  value="#{examenBean.preguntas[loop.index].pregunta}" id="pregunta"/><br></br>
-								    <h:message class="error" for="pregunta" />
+								    <h:outputLabel value="#{examenBean.preguntas[loop.index].pregunta}" /><br></br>
+
 								    <table>
 
 								    <ui:repeat value="#{examenBean.preguntas[loop.index].respuestas}" varStatus="loop2">
 								    	<tr>
-									    <td>Respuesta #{loop2.index+1} <h:inputText value="#{examenBean.preguntas[loop.index].respuestas[loop2.index].respuesta}" /></td>
+									    <td><h:outputLabel value="#{examenBean.preguntas[loop.index].respuestas[loop2.index].respuesta}" /></td>
 									    <td>
-									    	<h:selectOneRadio value="#{examenBean.preguntas[loop.index].respuestas[loop2.index].idTipoRespuesta}">
+									    	<h:selectOneRadio value="#{examenBean.preguntas[loop.index].respuestas[loop2.index].idTipoRespuestaByAlumno}">
 												<f:selectItem itemValue="1" itemLabel="Correcto" />
 												<f:selectItem itemValue="2" itemLabel="Incorrecto" />
 											</h:selectOneRadio>
@@ -86,11 +63,11 @@
 								</ui:repeat>
 
 				
-							<h:commandLink action="#{examenBean.guardarExamen}" styleClass="btn btn-success btn-block" value="#{examenBean.textSalvarExamen}">
+							<h:commandLink action="#{examenBean.verResultadoExamen}" styleClass="btn btn-success" value="Rendir">
                         	</h:commandLink>
-                        	<h:commandLink action="gestionExamenes" styleClass="btn btn-back btn-block" value="Volver">
+                        	<h:commandLink action="#{examenBean.listarRendirExamen}" style="margin-left: 5px" styleClass="btn btn-warning" value="Volver">
                         	</h:commandLink>
-<h:messages class="error"></h:messages>
+
 							</h:form>
 
 						</div>

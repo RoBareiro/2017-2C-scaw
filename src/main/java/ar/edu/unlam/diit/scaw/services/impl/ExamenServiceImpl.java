@@ -34,5 +34,27 @@ public class ExamenServiceImpl implements ExamenService {
 		servicioDao.salvarExamen(examen);
 		
 	}
+	
+	@Override
+	public Examenes getExamenById(Integer id) {
+		return servicioDao.getExamenById(id);
+		
+	}
+
+	@Override
+	public void editarExamen(Examenes examen) {
+		servicioDao.editarExamen(examen);
+	}
+
+	@Override
+	public void deshabilitarExamen(Integer id) {
+		servicioDao.deshabilitarExamen(id);
+	}
+
+	@Override
+	public List<Examenes> traerExamenActivos() {
+		return servicioDao.traerExamenActivos();
+	}
+	
 
 }

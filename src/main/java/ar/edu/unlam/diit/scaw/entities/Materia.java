@@ -10,6 +10,14 @@ public class Materia implements Serializable{
 	private String nombre;
 	private Integer idDocenteTitular;
 	private Integer idEstadoMateria;
+	
+	public Materia() {
+	}
+	
+	public Materia(String nombre) {
+		this.nombre = nombre;
+		
+	}
 	public Integer getId() {
 		return id;
 	}

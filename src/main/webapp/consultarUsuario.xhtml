@@ -1,16 +1,17 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
-	
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	>
 <h:head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<title>UNLAM - Consulta de Usuario</title>
-<link rel="stylesheet" type="text/css" href="css/table-style.css" />
+        <title>Panel de Adminsitracion</title>
+        <!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" type="text/css" href="css/table-style.css" />
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
 	<link rel="stylesheet" type="text/css" href="css/styles.css" />
 	<link rel="stylesheet" type="text/css" href="css/index.css" />
@@ -23,35 +24,56 @@
 	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<script type="text/javascript" src="js/welcome.js"></script>
 	
-
+	
 </h:head>
-
-<h:body>
+<body>
 <div class ="left-menu">
 <ui:include src="welcome.xhtml"/>
 </div>
 <div class ="body-menu">
-	<h3>UNLAM - Consulta de usuarios</h3>
- 		<div class="panel panel-default">
-                    <div class="panel-heading"><h3 class="panel-title">Usuarios registrados Activos</h3></div>
-                    <div class="panel-body">
-                        <h:dataTable value="#{usuarioBean.getFindById()}" var="usuario" class="table table-hover">
-                            	<h:column>
-									<f:facet name="header">Nombre y Apellido</f:facet>    				
-					      			#{usuario.nombre} #{usuario.apellido}
-					  		 	</h:column>
+				<!--  GESTION DE USUARIOS -->
+	<div class="panel panel-default">
+		<div class="panel-heading"><h3 class="panel-title">Modificar Usuario</h3></div>
+        	<div class="panel-body">
+				<h:form id="actualizarUsuario" method="post">
+					<h:inputHidden value="#{usuarioBean.id}" id="id" />
+					<h:inputHidden value="#{usuarioBean.tipoAccion}" id="accion" />
+						<div class="form-group">
+							<div class=" login-input input-group">
+								<span class="input-group-addon"><i class="glyphicon glyphicon-education"></i></span>
+								<h:inputText styleClass ="form-control" value="#{usuarioBean.nombre}" id="nombre" h:placeholder="Ingrese nombre">
+								<!--	<f:ajax event="blur" render="error-nombre" listener="#{usuarioBean.validarNombre}"/> -->
+								</h:inputText>
+							</div>
+							<div class=" login-input input-group">
+								<h:outputText id="error-nombre" styleClass="alert alert-danger" value ="#{usuarioBean.error}"></h:outputText>
+							</div>
+							<div class=" login-input input-group">
+								<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+								<h:inputText styleClass ="form-control" value="#{usuarioBean.apellido}" id="apellido" h:placeholder="Ingrese apellido">
+									<!--  <f:ajax event="blur" render="error-apellido" listener="#{usuarioBean.validarApellido}"/>-->
+								</h:inputText>
+							</div>
+							<div class=" login-input input-group">
+								<h:outputText id="error-apellido" styleClass="alert alert-danger" value ="#{usuarioBean.error}" ></h:outputText>
+							</div>
+							
+							<div class=" login-input input-group">
+								<span class="input-group-addon">@</span>
+								<h:inputText styleClass ="form-control" value="#{usuarioBean.eMail}" id="eMail" h:placeholder="Ingrese email">
+									<!--  <f:ajax event="blur" render="error-mail" listener="#{usuarioBean.validarEmail}"/>-->
+								</h:inputText>
+							</div>
+							<div class=" login-input input-group">
+								<h:outputText id="error-mail" styleClass="alert alert-danger" value ="#{usuarioBean.error}" ></h:outputText>
+							</div>	
+						</div>		
+			</h:form>
+		</div>
+	</div>
 
-                            	<h:column>
-									<f:facet name="header" >Email</f:facet>
-					    	  		#{usuario.email}
-						   		</h:column>
-                        </h:dataTable>
-                    </div>
-                </div>
 </div>
-
-			
-
-</h:body>
-
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/validation.js"></script>
+    </body>
 </html>

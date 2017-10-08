@@ -7,8 +7,21 @@ public class Respuestas implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private Integer idPregunta;
-	private String respuesta;
-	private Integer idTipoRespuesta;
+	private String 	respuesta;
+	private Integer idTipoRespuesta = 0;
+	private Integer idTipoRespuestaByAlumno = 0;
+	
+	public Respuestas(Integer id,Integer idPregunta,String respuesta,Integer idTipoRespuesta) {
+		this.id 				= id;
+		this.idPregunta			= idPregunta;
+		this.respuesta			= respuesta;
+		this.idTipoRespuesta	= idTipoRespuesta;
+	}
+	
+	public Respuestas() {
+
+	}
+	
 	public Integer getId() {
 		return id;
 	}
@@ -36,5 +49,14 @@ public class Respuestas implements Serializable{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
+
+	public Integer getIdTipoRespuestaByAlumno() {
+		return idTipoRespuestaByAlumno;
+	}
+
+	public void setIdTipoRespuestaByAlumno(Integer idTipoRespuestaByAlumno) {
+		this.idTipoRespuestaByAlumno = idTipoRespuestaByAlumno;
+	}
+
+
 }

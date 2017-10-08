@@ -69,14 +69,16 @@ public class MateriaBean implements Serializable {
 		String valor = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("idMateria");
 
 		servicioMateria.deshabilitarMateria(valor);
-		return "welcome";
+		
+		return "gestionMaterias";
 	}
 	
 	public String habilitar(){
 		String valor = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("idMateria");
 
 		servicioMateria.habilitarMateria(valor);
-		return "welcome";
+		
+		return "gestionMaterias";
 	}
 	
 	

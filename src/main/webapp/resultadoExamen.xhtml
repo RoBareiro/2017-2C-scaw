@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<title>Panel de Adminsitracion</title>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet"
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+</h:head>
+<body>
+	<div class="container">
+
+		<div class="row">
+
+			<div class="col-md-2"></div>
+
+			<div class="col-md-8">
+
+				<div class="panel panel-success">
+					<div class="panel-heading text-center">
+						<h1>Rendir Examen</h1>
+					</div>
+					<div class="panel-body">
+						<div class="col-md-2"></div>
+						<div class="col-md-10">
+
+							<h2>Resultado: <h:outputText value="#{examenBean.resultExamen2}"></h:outputText>% </h2>
+							<h:form>
+							<h:commandButton action="#{examenBean.listarRendirExamen}" styleClass="btn btn-back btn-block" value="Volver">
+                        	</h:commandButton>
+                        	</h:form>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+
+
+		</div>
+
+	</div>
+
+</body>
+</html>

@@ -45,6 +45,4 @@ public class DatosMaterias {
 	public void setIdDocente(Integer idDocente) {
 		this.idDocente = idDocente;
 	}
-	
-
 }

@@ -60,8 +60,4 @@ public class Examenes implements Serializable{
 	public void setEstadosExamenes(String estadosExamenes) {
 		this.estadosExamenes = estadosExamenes;
 	}
-	
-	
-	
-	
 }

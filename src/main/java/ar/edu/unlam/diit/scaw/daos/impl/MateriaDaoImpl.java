@@ -161,15 +161,12 @@ public class MateriaDaoImpl implements MateriaDao{
 		try {
 			conn = (dataSource.dataSource()).getConnection();
 		
-			// Creo la consulta SQL
 			PreparedStatement ps = conn.prepareStatement("UPDATE materias SET nombre = ? , idDocenteTitular = ? WHERE id=? ");
 			
-			// Seteo las variables parametrizadas
 			ps.setString(1, nombre);
 			ps.setInt(2, docente);
 			ps.setInt(3, idMateria);
 			
-			// Ejecuto la sentencia
 			ps.executeUpdate();
 			ps.close();
 							    

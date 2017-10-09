@@ -29,15 +29,13 @@ public class UsuarioDaoImpl implements UsuarioDao {
 					+ " inner join rolesusuarios ru "
 					+ " on u.id = ru.idusuario "
 					+ " where eMail = ? and idEstadoUsuario = 2 ");
-				//+ " where eMail = ? and contraseña = ? and idEstadoUsuario = 2 ");
+				
 			ps.setString(1, usuario.getEmail());
-			//ps.setString(2,usuario.getContraseña());
-			
-			
+						
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()){
 				String eMail = rs.getString("eMail");
-				String contraseña = rs.getString("contraseña");
+				String clave = rs.getString("clave");
 				Integer id = rs.getInt("id");
 				String apellido = rs.getString("apellido");
 				String nombre = rs.getString("nombre");
@@ -45,7 +43,7 @@ public class UsuarioDaoImpl implements UsuarioDao {
 				
 				logueado = new Usuario();
 				logueado.setEmail(eMail);
-				logueado.setContraseña(contraseña);
+				logueado.setClave(clave);
 				logueado.setId(id);
 				logueado.setApellido(apellido);
 				logueado.setNombre(nombre);
@@ -61,7 +59,7 @@ public class UsuarioDaoImpl implements UsuarioDao {
 
 	@Override
 	public List<Usuario> findAll() {
-		List<Usuario> ll = new LinkedList<Usuario>();
+		List<Usuario> lista = new LinkedList<Usuario>();
 		
 		try {
 			conn = (dataSource.dataSource()).getConnection();
@@ -75,26 +73,26 @@ public class UsuarioDaoImpl implements UsuarioDao {
 			while (rs.next()) {
 			  
 				String eMail = rs.getString("eMail");
-				String contraseña = rs.getString("contraseña");
+				String clave = rs.getString("clave");
 				Integer id = rs.getInt("id");
 				String apellido = rs.getString("apellido");
 				String nombre = rs.getString("nombre");
 			  
 				Usuario usuario = new Usuario();
 				usuario.setEmail(eMail);
-				usuario.setContraseña(contraseña);
+				usuario.setClave(clave);
 				usuario.setId(id);
 				usuario.setApellido(apellido);
 				usuario.setNombre(nombre);
 	
-				ll.add(usuario);
+				lista.add(usuario);
 			}
 			
 			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return ll;
+		return lista;
 	}
 	
 	@Override
@@ -106,11 +104,11 @@ public class UsuarioDaoImpl implements UsuarioDao {
 			conn = (dataSource.dataSource()).getConnection();
 	        Statement stmt = conn.createStatement();
 	        
-	      //OBTENGO EL ID DEL ULTIMO USUARIO
+	      //SE OBTIENE ID DEL ULTIMO USUARIO
 			ResultSet rs = stmt.executeQuery("select id from usuarios order by id desc limit 1"); 
 			
 			while(rs.next()){
-				//AL OBTENER EL ID LE SUMO 1 YA QUE DEBE SER EL PROXIMO USUARIO
+				//Sumo 1, deberia ser el proximo usuario
 				lastid = rs.getInt("id") + 1;
 				usuario.setId(lastid);
 			}
@@ -119,7 +117,7 @@ public class UsuarioDaoImpl implements UsuarioDao {
 	        		+ "  VALUES(?,?,?,?,?,1)");
 	        ps.setInt(1, usuario.getId());
 			ps.setString(2,usuario.getEmail());			
-			ps.setString(3,usuario.getContraseña());
+			ps.setString(3,usuario.getClave());
 			ps.setString(4,usuario.getApellido());
 			ps.setString(5,usuario.getNombre());
 			
@@ -127,13 +125,10 @@ public class UsuarioDaoImpl implements UsuarioDao {
 			
 			
 			if(lastid != 0){				
-				//SE GUARDA LA RELACION ENTRE EL USUARIO Y EL ROL
 				PreparedStatement ps1 = conn.prepareStatement("Insert into rolesusuarios values(?,?)");
 				String queryrol = "Insert into rolesusuarios values(" + lastid + "," + idRol + ");"; 
 
-				//SE EJECUTA DICHA QUERY
 				stmt.executeUpdate(queryrol);
-				//CIERRO LA CONEXION
 				conn.close();
 			} else {
 				
@@ -192,7 +187,7 @@ public class UsuarioDaoImpl implements UsuarioDao {
 			while (rs.next()) {
 			  
 				String eMail = rs.getString("eMail");
-				String contraseña = rs.getString("contraseña");
+				String clave = rs.getString("clave");
 				Integer id = rs.getInt("id");
 				String apellido = rs.getString("apellido");
 				String nombre = rs.getString("nombre");
@@ -202,7 +197,7 @@ public class UsuarioDaoImpl implements UsuarioDao {
 				
 				Usuario usuario = new Usuario();
 				usuario.setEmail(eMail);
-				usuario.setContraseña(contraseña);
+				usuario.setClave(clave);
 				usuario.setId(id);
 				usuario.setApellido(apellido);
 				usuario.setNombre(nombre);
@@ -255,7 +250,7 @@ public class UsuarioDaoImpl implements UsuarioDao {
 			
 			while(rs.next()){
 				String eMail = rs.getString("eMail");
-				String contraseña = rs.getString("contraseña");
+				String clave = rs.getString("clave");
 				Integer id = rs.getInt("id");
 				String apellido = rs.getString("apellido");
 				String nombre = rs.getString("nombre");
@@ -263,7 +258,7 @@ public class UsuarioDaoImpl implements UsuarioDao {
 				
 				usuario = new Usuario();
 				usuario.setEmail(eMail);
-				usuario.setContraseña(contraseña);
+				usuario.setClave(clave);
 				usuario.setId(id);
 				usuario.setApellido(apellido);
 				usuario.setNombre(nombre);
@@ -315,33 +310,22 @@ public class UsuarioDaoImpl implements UsuarioDao {
 	}
 	
 	@Override
-	public void updateUsuario(Integer id,String mail, String contraseña,String apellido,String nombre){
+	public void updateUsuario(Integer id,String mail, String clave,String apellido,String nombre){
 		try {
 			conn = (dataSource.dataSource()).getConnection();
 		
 			PreparedStatement ps = conn.prepareStatement("UPDATE Usuarios Set"
 					+ " eMail = ? ,"
-					+ " contraseña = ? , "
+					+ " clave = ? , "
 					+ " apellido = ? , "
 					+ " nombre = ?   "
 					+ " where id = ? ");
 			ps.setString(1,mail);
-			ps.setString(2,contraseña);
+			ps.setString(2,clave);
 			ps.setString(3,apellido);
 			ps.setString(4,nombre);
 			ps.setInt(5, id);
-			
-			/*Statement query;
-			
-			String sql = "UPDATE Usuarios SET "
-					+ " eMail = '" 		+ mail + "', " 
-					+ " contraseña = '"  +  contraseña + "', " 
-					+ " apellido = '" 	+ 	apellido + "', "
-            		+ "	nombre = '"   	+	nombre + "'" 
-					+ " WHERE id = " 	+ id;
-			 	 	
-
-			query = conn.createStatement();	*/	
+						
 			ps.executeUpdate();
 						
 			ps.close();

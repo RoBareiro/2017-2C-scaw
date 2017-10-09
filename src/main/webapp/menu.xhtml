@@ -1,4 +1,3 @@
-<<<<<<< HEAD:src/main/webapp/leftMenu.xhtml
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -13,7 +12,7 @@
 </h:head>
 <h:body>
 <div class="nav-side-menu">
-	<div class="brand">Panel de Usuario</div>
+	<div class="brand">Menú</div>
 		<h:form id="myForm">
 			<h:inputHidden value="#{usuarioBean.id}" id="id" />
 			<h:inputHidden value="#{usuarioBean.grantAll}"   id="grantAll" />
@@ -29,12 +28,12 @@
 						</h:commandLink>
 					</li>
 					<li id="admLi" data-toggle="collapse" data-target="#administrar" class="collapsed active">
-                  		<a href="#"><i class="fa fa-gift fa-lg"></i> Administrar <span class="arrow"></span></a>
+                  		<a href="#"><i class="fa fa-gift fa-lg"></i> Administrador <span class="arrow"></span></a>
                 	</li>
 					<ul class="sub-menu collapse" id="administrar">
 					<li>
 						<h:commandLink action="#{usuarioBean.solicitudesUsuarios}">
-							<h:outputText value ="Solicitudes Usuarios"></h:outputText>
+							<h:outputText value ="Solicitudes de alta"></h:outputText>
 							<f:param name ="idUsuario" value ="#{usuarioBean.id}"></f:param>
 						</h:commandLink>
 					</li>
@@ -75,7 +74,7 @@
 						</li>
 					</ul>
 					<li id="aluLI" data-toggle="collapse" data-target="#alumno" class="collapsed active">
-                  		<a href="#"><i class="fa fa-gift fa-lg"></i> Alumno <span class="arrow"></span></a>
+                  		<a href="#"><i class="fa fa-gift fa-lg"></i> Alumnos <span class="arrow"></span></a>
                 	</li>
 					<ul id="alumno" class="sub-menu collapse">
 						<li>
@@ -98,7 +97,6 @@
 	</h:form>
 </div>
 </h:body>
-=======
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html">
@@ -121,7 +119,7 @@
 						</h:commandLink>
 					</li>
 					<li id="admLi" data-toggle="collapse" data-target="#administrar" class="collapsed active">
-                  		<a href="#"><i class="fa fa-gift fa-lg"></i> Administrar <span class="arrow"></span></a>
+                  		<a href="#"><i class="fa fa-gift fa-lg"></i> Administración <span class="arrow"></span></a>
                 	</li>
 					<ul class="sub-menu collapse" id="administrar">
 					<li>
@@ -172,6 +170,4 @@
 			</div>
 	</h:form>
 </div>
-
->>>>>>> 5a205e21c96ba81dfe07195571247a09fbcf00fc:src/main/webapp/menu.xhtml
 </html>

@@ -9,7 +9,7 @@
 	xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
 
 <h:head>
-	<title>UNLAM - Sistema de evaluación</title>
+	<title>Sistema de evaluación</title>
 	
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
 	<link rel="stylesheet" type="text/css" href="css/styles.css" />
@@ -22,7 +22,7 @@
 <h:body>
 
 <div class = "container">
-	<h3 class="text-center">UNLAM - Sistema de evaluación</h3>
+	<h3 class="text-center">Bienvenido al sistema de evaluación</h3>
 		<div id="loginbox" class="login mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
 			<div class="panel panel-info" >
 				 <div class="panel-heading">
@@ -37,7 +37,7 @@
 				</div>
 				<div  class=" login-input input-group">
 					<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-					<h:inputSecret styleClass ="form-control" value="#{usuarioBean.contraseña}" id="contraseña" p:placeholder="Ingrese Contraseña"></h:inputSecret>
+					<h:inputSecret styleClass ="form-control" value="#{usuarioBean.clave}" id="clave" p:placeholder="Ingrese Clave"></h:inputSecret>
 				</div>
 				<div  class="login-btn form-group">
 					<div class="col-sm-12 controls">
@@ -49,7 +49,7 @@
 				<div class="form-group">
                  	<div class="col-md-12 control">
                     	 <div  class="login-registrar" >
-                               Todavia no tienes cuenta?
+                               ¿Sos nuevo?
                         	       <h:commandLink action="#{usuarioBean.registro}">
                         	       		<h:outputText value ="Registrate aqui!"></h:outputText>
                         	       		<f:param name="opc" value = "3"></f:param>

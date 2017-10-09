@@ -29,19 +29,23 @@
 </div>
      <div class="body-menu">
     	 <div class="panel panel-default">
-			<div class="panel-heading"><h3 class="panel-title">Usuarios registrados Activos</h3></div>
+			<div class="panel-heading"><h3 class="panel-title">Usuarios Activos</h3></div>
 				<div class="panel-body">
 					<h:dataTable value="#{usuarioBean.findAll}" var="usuario" class="table table-hover">
 						<h:column>
-							<f:facet name="header">Nombre y Apellido</f:facet>    				
-					      		#{usuario.nombre} #{usuario.apellido}
+							<f:facet name="header">Nombre: </f:facet>    				
+					      		#{usuario.nombre}
 						</h:column>
 						<h:column>
-							<f:facet name="header" >Email</f:facet>
+							<f:facet name="header">Apellido: </f:facet>    				
+					      		#{usuario.apellido}
+						</h:column>
+						<h:column>
+							<f:facet name="header" >Email: </f:facet>
 					    		#{usuario.email}
 						</h:column>
 						<h:column>
-							<f:facet name="header">Accion</f:facet>  		
+							<f:facet name="header">Accion: </f:facet>  		
 							<h:form>
 								<h:commandButton styleClass="btn btn-primary" action="#{usuarioBean.editarUsuario}" value="Modificar Usuario">
 									<f:param name ="idUsuario" value ="#{usuarioBean.idUser}"></f:param>

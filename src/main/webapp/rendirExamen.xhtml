@@ -32,18 +32,18 @@
 
 							<h:form rendered="true" id="form">
 								<h:inputHidden value="#{examenBean.examenSelected.id}" id="examenId"/>
-								<h2>Nombre del Examen</h2>
+								<h2>Nombre: </h2>
 								<h:outputLabel value="#{examenBean.nombre}" id="nombreExamen" >
 								</h:outputLabel>
 
-								<h2>Materia</h2>
+								<h2>Materia: </h2>
 								<div class="form-group">
 									<h:outputLabel value="#{examenBean.examenSelected.materia.nombre}"  >
 								</h:outputLabel>
 								</div>
 
 								<ui:repeat value="#{examenBean.preguntas}" varStatus="loop">
-								<h2>Pregunta #{loop.index+1}</h2>
+								<h2>Pregunta #{loop.index+1}: </h2>
 								    <h:outputLabel value="#{examenBean.preguntas[loop.index].pregunta}" /><br></br>
 
 								    <table>

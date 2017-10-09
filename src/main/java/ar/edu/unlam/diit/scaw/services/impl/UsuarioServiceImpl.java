@@ -80,9 +80,9 @@ public class UsuarioServiceImpl implements UsuarioService {
 	}
 	
 	@Override
-	public void actualizarUsuario(Integer id,String mail, String contraseña,String apellido,String nombre){
+	public void actualizarUsuario(Integer id,String mail, String clave,String apellido,String nombre){
 		
-		usuarioHsql.updateUsuario(id, mail, contraseña, apellido, nombre);
+		usuarioHsql.updateUsuario(id, mail, clave, apellido, nombre);
 	}
 
 	@Override
@@ -133,12 +133,12 @@ public class UsuarioServiceImpl implements UsuarioService {
 		
 	}
 
-	@Override
-	public String guardarPass(String pass){
+	public String encriptar(String p) throws Exception{
 		
 
 		String secretKey = "SCAW";
 		String passBase64 = "";
+		
         try {
  
             MessageDigest md = MessageDigest.getInstance("SHA-256");
@@ -149,37 +149,19 @@ public class UsuarioServiceImpl implements UsuarioService {
             Cipher cipher = Cipher.getInstance("DESede");
             cipher.init(Cipher.ENCRYPT_MODE, key);
  
-            byte[] plainTextBytes = pass.getBytes("utf-8");
+            byte[] plainTextBytes = p.getBytes("utf-8");
             byte[] buf = cipher.doFinal(plainTextBytes);
             byte[] base64Bytes = Base64.encodeBase64(buf);
             passBase64 = new String(base64Bytes);
  
         } catch (Exception ex) {
+        	
+        	throw ex;
+        	
         }
         return passBase64;
-	}
-	
-	public String recuperarPass(String pass){
-		String secretKey = "SCAW";
-		String passBase64 = "";
-		try{
-			
-			byte[]message = Base64.decodeBase64(pass.getBytes("UTF-8"));
-			MessageDigest md = MessageDigest.getInstance("SHA-256");
-			byte[] digestOfPassword = md.digest(secretKey.getBytes("UTF-8"));
-			byte[] keyBytes = Arrays.copyOf(digestOfPassword, 24);
-			SecretKey key = new SecretKeySpec(keyBytes, "DESede");
-			 
-            Cipher decipher = Cipher.getInstance("DESede");
-            decipher.init(Cipher.DECRYPT_MODE, key);
-            
-            byte[] plainText = decipher.doFinal(message);
-            
-            passBase64 = new String(plainText, "UTF-8");
 
-        } catch (Exception ex) {
-        }
-        return passBase64;
+		
 	}
 	
 	public boolean isValidPass(String pass1,String pass2){

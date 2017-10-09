@@ -56,7 +56,4 @@ public class Preguntas implements Serializable{
 	public void setRespuestas(List<Respuestas> respuestas) {
 		this.respuestas = respuestas;
 	}
-	
-	
-
 }

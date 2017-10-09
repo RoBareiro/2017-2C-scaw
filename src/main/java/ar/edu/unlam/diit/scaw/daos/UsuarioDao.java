@@ -15,7 +15,7 @@ public interface UsuarioDao {
 	public List<Usuario> findPend();
 	public Usuario findById(Integer idUsuario);
 	public void updateEstado(Integer id,Integer cdEstado);
-	public void updateUsuario(Integer id,String mail, String contraseña,String apellido,String nombre);
+	public void updateUsuario(Integer id,String mail, String clave,String apellido,String nombre);
 	
 	
 }

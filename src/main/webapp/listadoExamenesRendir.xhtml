@@ -19,8 +19,7 @@
 </div>
 <div class ="body-menu">
 				<div class="panel-heading text-center">
-					<h1>PANEL GESTION EXAMENES
-						</h1>
+					<h1> Gestión de examenes</h1>
 				</div>
 				<div class="panel panel-default">
                     <div class="panel-body">
@@ -29,7 +28,7 @@
 							 rowClasses="order-table-odd-row,order-table-even-row">
 								
 								<h:column>
-									<f:facet name="header">Nombre</f:facet>
+									<f:facet name="header">Titulo</f:facet>
 									#{gestionExamen.nombre}
 								</h:column>
 
@@ -41,7 +40,7 @@
                                  
 								<h:column>
 									<f:facet name="header">Accion</f:facet>
-					    	  		<h:commandButton action="#{examenBean.rendirExamen}" class="btn btn-success" value="Rendir">
+					    	  		<h:commandButton action="#{examenBean.rendirExamen}" class="btn btn-success" value="Enviar">
 					    	  		</h:commandButton>
 					    	  		
 						   		</h:column> 

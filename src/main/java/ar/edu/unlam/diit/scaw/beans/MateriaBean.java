@@ -142,9 +142,5 @@ public class MateriaBean implements Serializable {
 	public void setIdUsuario(Integer idUsuario) {
 		this.idUsuario = idUsuario;
 	}
-	
-	
-	
-	
-	
+		
 }

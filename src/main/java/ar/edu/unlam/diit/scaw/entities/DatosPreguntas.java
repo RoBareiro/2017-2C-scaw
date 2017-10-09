@@ -10,10 +10,6 @@ public class DatosPreguntas {
 	private String pregunta;
 	private String materia;
 	
-	
-	
-
-	
 	public Integer getId() {
 		return id;
 	}

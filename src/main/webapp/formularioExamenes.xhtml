@@ -8,7 +8,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:head>
-	<title>Panel de Adminsitracion</title>
+	<title>Panel de Adminsitración</title>
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet"
 		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
@@ -29,7 +29,7 @@
 
 				<div class="panel panel-success">
 					<div class="panel-heading text-center">
-						<h1>ABM EXAMENES2</h1>
+						<h1>Panel de control de examenes</h1>
 					</div>
 					<div class="panel-body">
 						<div class="col-md-2"></div>
@@ -42,7 +42,7 @@
 									value="#{examenBean.nombre}" id="nombreExamen" >
 								</h:inputText>
 								<h:message class="error" for="nombreExamen" />
-								<h2>Materia</h2>
+								<h2>Materia a rendir</h2>
 								
 								
 								
@@ -57,7 +57,7 @@
 									</h:selectOneMenu>
 								</div>
 
-								<h2>Estado</h2>
+								<h2>Estado del examen</h2>
 								<h:selectOneRadio value="#{examenBean.idEstadoExamen}">
 									<f:selectItem itemValue="1" itemLabel="Pendiente" />
 									<f:selectItem itemValue="2" itemLabel="Examen en Curso" />
@@ -90,7 +90,7 @@
                         	</h:commandLink>
                         	<h:commandLink action="gestionExamenes" styleClass="btn btn-back btn-block" value="Volver">
                         	</h:commandLink>
-<h:messages class="error"></h:messages>
+							<h:messages class="error"></h:messages>
 							</h:form>
 
 						</div>

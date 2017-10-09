@@ -127,11 +127,5 @@ public class DatosMateriasBean implements Serializable {
 	public void setMensaje(String mensaje) {
 		this.mensaje = mensaje;
 	}
-	
-	
-	
-	
-	
-	
 
 }

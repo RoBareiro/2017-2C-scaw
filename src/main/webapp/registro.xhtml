@@ -26,7 +26,7 @@
 
 <h:body>
 <div class="container">
-		<h3 class="text-center">UNLAM - Registro de usuarios</h3>
+		<h3 class="text-center">Registro de usuarios</h3>
 		<div id="loginbox" class="login mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
 			<div class="panel panel-info" >
 				 <div class="panel-heading">
@@ -72,7 +72,7 @@
 				
 				<div  class=" login-input input-group">
 					<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-					<h:inputSecret styleClass ="form-control" value="#{usuarioBean.contraseña}" id="pass" p:placeholder="Ingrese Contraseña"></h:inputSecret>
+					<h:inputSecret styleClass ="form-control" value="#{usuarioBean.clave}" id="pass" p:placeholder="Ingrese Clave"></h:inputSecret>
 				</div>
 				
 				<div class=" login-input input-group">
@@ -88,7 +88,7 @@
 				<div class="form-group">
                  	<div class="col-md-12 control">
                     	 <div  class="login-registrar" >
-                               Ya tienes cuenta?
+                               Si ya tenes cuenta... 
                         	       <h:commandLink action="#{usuarioBean.login}">
                         	       		<h:outputText value ="Inicia sesi&oacute;n!"></h:outputText>
                         	       </h:commandLink>

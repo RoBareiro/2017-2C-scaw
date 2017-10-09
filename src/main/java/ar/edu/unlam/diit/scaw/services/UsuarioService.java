@@ -15,14 +15,12 @@ public interface UsuarioService {
 	public List<Rol> getRoles();
 	public void actualizarEstado(Integer id,Integer cdEstado);
 	public List<Usuario> getAllProfesores();
-	public void actualizarUsuario(Integer id,String mail, String contraseña,String apellido,String nombre);
+	public void actualizarUsuario(Integer id,String mail, String clave,String apellido,String nombre);
 	public boolean isGrantAll(Integer id);
 	public boolean isGrantDoc(Integer id);
 	public boolean isGrantAlu(Integer id);
 	public boolean isGrantAdm(Integer id);
-	public String guardarPass(String pass);
-	public String recuperarPass(String pass);
 	public boolean isValidPass(String pass1,String pass2);
-
+	public String encriptar(String p) throws Exception;
 
 }

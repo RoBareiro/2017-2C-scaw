@@ -9,13 +9,11 @@ public class Usuario implements Serializable {
 
 	private Integer id;
 	private String email;
-	private String contraseña;
+	private String clave;
 	private String apellido;
 	private String nombre;
 	private List<Integer> idRol;
 	
-	
-
 	public Usuario() {
 	}
 
@@ -51,12 +49,12 @@ public class Usuario implements Serializable {
 		this.email = email;
 	}
 
-	public String getContraseña() {
-		return contraseña;
+	public String getClave() {
+		return clave;
 	}
 
-	public void setContraseña(String contraseña) {
-		this.contraseña = contraseña;
+	public void setClave(String clave) {
+		this.clave = clave;
 	}
 
 	public List<Integer> getIdRol() {
@@ -74,7 +72,7 @@ public class Usuario implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Usuario [id=" + id + ", email=" + email + ", contraseña=" + contraseña + ", apellido=" + apellido
+		return "Usuario [id=" + id + ", email=" + email + ", clave=" + clave + ", apellido=" + apellido
 				+ ", nombre=" + nombre + ", idRol=" + idRol + "]";
 	}
 
@@ -83,7 +81,7 @@ public class Usuario implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((apellido == null) ? 0 : apellido.hashCode());
-		result = prime * result + ((contraseña == null) ? 0 : contraseña.hashCode());
+		result = prime * result + ((clave == null) ? 0 : clave.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((idRol == null) ? 0 : idRol.hashCode());
@@ -105,10 +103,10 @@ public class Usuario implements Serializable {
 				return false;
 		} else if (!apellido.equals(other.apellido))
 			return false;
-		if (contraseña == null) {
-			if (other.contraseña != null)
+		if (clave == null) {
+			if (other.clave != null)
 				return false;
-		} else if (!contraseña.equals(other.contraseña))
+		} else if (!clave.equals(other.clave))
 			return false;
 		if (email == null) {
 			if (other.email != null)
@@ -132,8 +130,4 @@ public class Usuario implements Serializable {
 			return false;
 		return true;
 	}
-
-	
-
-	
 }

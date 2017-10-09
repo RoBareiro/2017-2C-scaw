@@ -27,15 +27,13 @@ INSERT INTO Usuarios
 VALUES(4, 'jmonteagudo@unlam.edu.ar', '1234', 'Monteagudo', 'Juan', 2);
 
 INSERT INTO Usuarios
-VALUES(5, 'bareiro@unlam.edu.ar', '1234', 'Bareiro', 'Rocio', 2);
+VALUES(5, 'bareiro@unlam.edu.ar', 'rocio*07', 'Bareiro', 'Rocio', 2);
 INSERT INTO Usuarios
-VALUES(6, 'castaner@unlam.edu.ar', '1234', 'Castaner', 'Rocio', 2);
+VALUES(6, 'castaner@unlam.edu.ar', 'rocio*09', 'Castaner', 'Rocio', 2);
 INSERT INTO Usuarios
-VALUES(7, 'dortona@unlam.edu.ar', '1234', 'Dortona', 'Tomas', 2);
+VALUES(7, 'dortona@unlam.edu.ar', 'toto_velez', 'Dortona', 'Tomas', 2);
 INSERT INTO Usuarios
-VALUES(8, 'garcia@unlam.edu.ar', '1234', 'Pablo', 'Garcia', 2);
-INSERT INTO Usuarios
-VALUES(9, 'martinez@unlam.edu.ar', '1234', 'Martinez', 'Matias Sebastian', 2);
+VALUES(8, 'martinez@unlam.edu.ar', 'mati_mati', 'Martinez', 'Matias Sebastian', 2);
 
 /* RolesUsuarios */
 INSERT INTO RolesUsuarios

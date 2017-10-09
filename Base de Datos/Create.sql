@@ -1,7 +1,7 @@
 CREATE TABLE Usuarios(
 id int NOT NULL PRIMARY KEY,
 eMail varchar(255) NOT NULL,
-contraseña varchar(255) NOT NULL,
+clave varchar(255) NOT NULL,
 apellido varchar(255) NOT NULL,
 nombre varchar(255) NOT NULL,
 idEstadoUsuario int);

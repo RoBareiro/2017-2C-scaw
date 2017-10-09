@@ -1,6 +1,7 @@
 package ar.edu.unlam.diit.scaw.daos.impl;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -152,16 +153,24 @@ public class ExamenDaoImpl implements ExamenDao {
 		try {
 			Integer id = this.getIdExamen();
 			conn = (dataSource.dataSource()).getConnection();
-		
-			Statement query;
+	
 			
-			query = conn.createStatement();
+			//Statement query;
 			
-			String nombre = " '" + examen.getNombre() + "' ";
-			Integer idmateria = examen.getIdMateria();
-			String sql = "INSERT INTO Examenes (id,nombre, idMateria, idEstadoExamen) VALUES("+id+"," + nombre + "," + idmateria + ", "+examen.getIdEstadoExamen()+")";
-			System.out.println(sql);
-			query.executeUpdate(sql);  
+			//query = conn.createStatement();
+			
+			//String nombre = " '" + examen.getNombre() + "' ";
+			//Integer idmateria = examen.getIdMateria();
+			//String sql = "INSERT INTO Examenes (id,nombre, idMateria, idEstadoExamen) VALUES("+id+"," + nombre + "," + idmateria + ", "+examen.getIdEstadoExamen()+")";
+			//System.out.println(sql);
+			//query.executeUpdate(sql);  
+			PreparedStatement sql = conn.prepareStatement("INSERT INTO Examenes (id,nombre, idMateria, idEstadoExamen) VALUES(?,?,1)");
+			sql.setString(1, examen.getNombre());
+			sql.setInt(2, examen.getIdMateria());
+			sql.executeUpdate();
+			sql.close();
+			
+			
 			try {
 				insertPreguntas(id,examen.getPreguntas());
 			} catch (InterruptedException e) {
@@ -175,7 +184,7 @@ public class ExamenDaoImpl implements ExamenDao {
 			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}	
+		}
 	}
 	
 	private Integer getIdExamen() {
@@ -288,10 +297,11 @@ public class ExamenDaoImpl implements ExamenDao {
 			System.out.println(sql);
 			query.executeUpdate(sql);  
 			
-			sql = "DELETE FROM preguntas as p WHERE p.idexamen="+examen.getId();
-			System.out.println(sql);
-			query.executeUpdate(sql);
-			//conn.commit();
+			String nombre = " '" + examen.getNombre() + "' ";
+			Integer idmateria = examen.getIdMateria();
+			String sqln = "INSERT INTO Examenes (id,nombre, idMateria, idEstadoExamen) VALUES("+examen.getId()+"," + nombre + "," + idmateria + ", "+examen.getIdEstadoExamen()+")";
+			System.out.println(sqln);
+			query.executeUpdate(sqln);  
 			try {
 				insertPreguntas(examen.getId(),examen.getPreguntas());
 			} catch (InterruptedException e) {
@@ -309,6 +319,16 @@ public class ExamenDaoImpl implements ExamenDao {
 		try {
 			conn = (dataSource.dataSource()).getConnection();
 		
+			//Statement query;
+			//query = conn.createStatement();
+			//String sql = "UPDATE Examenes set idEstadoExamen=3 WHERE id="+id;
+			//System.out.println(sql);
+			//query.executeUpdate(sql);  
+			
+			//Consulta SQL
+						PreparedStatement ps = conn.prepareStatement("UPDATE Examenes set idEstadoExamen=3 WHERE id = ? ");
+						ps.setInt(1, id);
+			ps.executeUpdate();
 			Statement query;
 			
 			query = conn.createStatement();

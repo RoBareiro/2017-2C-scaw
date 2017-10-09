@@ -28,7 +28,7 @@ public class UsuarioBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private String eMail = null;
-	private String contraseña = null;
+	private String clave = null;
 	private Integer id = null;
 	private String apellido = null;
 	private String nombre = null;
@@ -56,20 +56,20 @@ public class UsuarioBean implements Serializable {
 		service = (UsuarioService) new UsuarioServiceImpl();
 	}
 	
-	public UsuarioBean(String eMail, String contraseña, Integer id, String apellido, String nombre) {
+	public UsuarioBean(String eMail, String clave, Integer id, String apellido, String nombre) {
 		super();
 		this.eMail = eMail;
-		this.contraseña = contraseña;
+		this.clave = clave;
 		this.id = id;
 		this.apellido = apellido;
 		this.nombre = nombre;
 	}
 	
-	public String save() {
+	public String save() throws Exception {
 		
 		Usuario person = buildUsuario();
 			
-		person.setContraseña(service.guardarPass(this.contraseña));
+		person.setClave(service.encriptar(this.clave));
 		
 		service.save(person, this.idRol);
 		
@@ -110,12 +110,12 @@ public class UsuarioBean implements Serializable {
 		return list;
 	}
 	
-	public String login(){
+	public String login() throws Exception{
 		
 		Usuario usuario = new Usuario();
 		usuario.setEmail(this.eMail);
 		Usuario logueado = service.login(usuario);
-		if(service.isValidPass(this.contraseña,logueado.getContraseña())) {
+		if(service.isValidPass(this.clave,logueado.getClave())) {
 
 			checkGrandUser(logueado.getId());
 			
@@ -125,7 +125,6 @@ public class UsuarioBean implements Serializable {
 	}
 		return "index";
 }
-
 	
 	public String registro(){
 		tipoAccion = "RE";
@@ -235,10 +234,9 @@ public String nuevoExamen(){
 
 				
 		if(service.isGrantAdm(idLogueado) || service.isGrantAll(idLogueado) && logeado.equals("Y")){
-			
-			//SE VERIFICA QUE EL USUARIO TENGA SOLICITUDES PENDIENTES
+			//Chequea que no haya solicitudes pendientes
 			if(userspend.contains(useramodif)){
-			//SE VERIFICA EL NUMERO DE OPCION YA QUE SE PODRIA MODIFICAR Y PONER UNO NO DISPONIBLE COMO OPCION
+
 				if(opc == 2 || opc == 3){
 					
 					service.actualizarEstado(idUsuario, opc);
@@ -251,7 +249,7 @@ public String nuevoExamen(){
 				}
 			} else {
 				
-				error = "El usuario no tiene solicitudes pendientes";
+				error = "No tienes solicitudes pendientes";
 			}
 		}
 		
@@ -273,7 +271,7 @@ public String nuevoExamen(){
 			if(service.isGrantAdm(idUsuario) || service.isGrantAll(idUsuario) && logeado.equals("Y")){
 			tipoAccion = "CO";
 			eMail = user.getEmail();
-			contraseña = user.getContraseña();
+			clave = user.getClave();
 			id = user.getId();
 			apellido = user.getApellido();
 			nombre = user.getNombre();
@@ -299,7 +297,7 @@ public String nuevoExamen(){
 			try{
 				if(service.isGrantAdm(idUsuario) || service.isGrantAll(idUsuario) && logeado.equals("Y")){
 					eMail = user.getEmail();
-					contraseña = user.getContraseña();
+					clave = user.getClave();
 					id = user.getId();
 					apellido = user.getApellido();
 					nombre = user.getNombre();
@@ -325,7 +323,7 @@ public String nuevoExamen(){
 				error = "EL mail ingresado es invalido, introduce un mail valido";
 				return "editarUsuario";
 			}else{
-				String passEncript = service.guardarPass(this.contraseña);
+				String passEncript = service.encriptar(this.clave);
 				service.actualizarUsuario(this.id, this.eMail,passEncript, this.apellido, this.nombre);
 			}
 			
@@ -377,7 +375,7 @@ public String nuevoExamen(){
 		Usuario usuario = new Usuario();
 		
 		usuario.setEmail(this.eMail);
-		usuario.setContraseña(contraseña);
+		usuario.setClave(clave);
 		usuario.setId(id);
 		usuario.setApellido(this.apellido);
 		usuario.setNombre(this.nombre);
@@ -393,13 +391,13 @@ public String nuevoExamen(){
 		this.eMail = email;
 	}
 
-	public String getContraseña() {
-		return contraseña;
+	public String getClave() {
+		return clave;
 
 	}
 
-	public void setContraseña(String contraseña) {
-		this.contraseña = contraseña;
+	public void setClave(String clave) {
+		this.clave = clave;
 	}
 
 	public Integer getId() {

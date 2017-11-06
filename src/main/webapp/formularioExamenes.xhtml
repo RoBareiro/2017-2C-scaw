@@ -29,7 +29,7 @@
 
 				<div class="panel panel-success">
 					<div class="panel-heading text-center">
-						<h1>Panel de control de examenes</h1>
+						<h1>Gestion de examenes</h1>
 					</div>
 					<div class="panel-body">
 						<div class="col-md-2"></div>
@@ -37,12 +37,12 @@
 
 							<h:form rendered="true" id="form">
 								<h:inputHidden value="#{examenBean.examenSelected.id}" id="examenId"/>
-								<h2>Nombre del Examen</h2>
+								<h2>Titulo</h2>
 								<h:inputText styleClass="form-control" size="60"
 									value="#{examenBean.nombre}" id="nombreExamen" >
 								</h:inputText>
 								<h:message class="error" for="nombreExamen" />
-								<h2>Materia a rendir</h2>
+								<h2>Materia</h2>
 								
 								
 								
@@ -57,7 +57,7 @@
 									</h:selectOneMenu>
 								</div>
 
-								<h2>Estado del examen</h2>
+								<h2>Estado</h2>
 								<h:selectOneRadio value="#{examenBean.idEstadoExamen}">
 									<f:selectItem itemValue="1" itemLabel="Pendiente" />
 									<f:selectItem itemValue="2" itemLabel="Examen en Curso" />

@@ -24,7 +24,7 @@
 <body>
 	<div class ="left-menu"><ui:include src="welcome.xhtml"/></div>
 	<div class="body-menu">
-     	<div class="panel panel-default">
+     	<div class="panel panel-warning">
 			<div class="panel-heading"><h3 class="panel-title">Gestion de Materias</h3></div>
 				<div class="panel-body">
                 	<h:dataTable value="#{materiaBean.getAllMaterias()}" var="dato" styleClass="table table-hover">        	
@@ -65,7 +65,7 @@
 									<h:form id="editar">
 										<input type="hidden" name="idMateria" value="#{dato.idMateria}" />
 										<input type="hidden" name="idDocente" value="#{dato.idDocente}" />
-							      		<h:commandButton styleClass="btn btn-warning" action="#{datosMateriasBean.editar()}" value="Modificar Materia" >
+							      		<h:commandButton styleClass="btn btn-info" action="#{datosMateriasBean.editar()}" value="Modificar Materia" >
 							      			<f:param name ="idUsuario" value ="#{usuarioBean.idUser}"></f:param>
 							      		</h:commandButton>
 						   			</h:form>
@@ -73,7 +73,7 @@
 						   		                                             
                     </h:dataTable>
                     <h:form>
-                        	<h:commandLink action="#{usuarioBean.nuevaMateria}" styleClass="btn btn-success btn-block">
+                        	<h:commandLink action="#{usuarioBean.nuevaMateria}" styleClass="btn btn-primary btn-block">
                         	       			<h:outputText value ="Agregar nueva Materia"></h:outputText>
                         	       			<f:param name ="idUsuario" value ="#{usuarioBean.idUser}"></f:param>
                         	</h:commandLink>

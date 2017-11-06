@@ -115,14 +115,14 @@ public class UsuarioBean implements Serializable {
 		Usuario usuario = new Usuario();
 		usuario.setEmail(this.eMail);
 		Usuario logueado = service.login(usuario);
-		if(service.isValidPass(this.clave,logueado.getClave())) {
+		if(logueado != null && service.isValidPass(this.clave,logueado.getClave())) {
 
 			checkGrandUser(logueado.getId());
 			
 			session.setAttribute("logeado","Y");
 			
 			return "welcome";
-	}
+		}
 		return "index";
 }
 	

@@ -28,7 +28,7 @@
 <ui:include src="welcome.xhtml"/>
 </div>
      <div class="body-menu">
-    	 <div class="panel panel-default">
+    	 <div class="panel panel-warning">
 			<div class="panel-heading"><h3 class="panel-title">Usuarios Activos</h3></div>
 				<div class="panel-body">
 					<h:dataTable value="#{usuarioBean.findAll}" var="usuario" class="table table-hover">
@@ -47,11 +47,11 @@
 						<h:column>
 							<f:facet name="header">Accion: </f:facet>  		
 							<h:form>
-								<h:commandButton styleClass="btn btn-primary" action="#{usuarioBean.editarUsuario}" value="Modificar Usuario">
+								<h:commandButton styleClass="btn btn-warning" action="#{usuarioBean.editarUsuario}" value="Modificar Usuario">
 									<f:param name ="idUsuario" value ="#{usuarioBean.idUser}"></f:param>
 									<f:param name ="idUsuarioEdit" value ="#{usuario.id}"></f:param>
 								</h:commandButton>
-								<h:commandButton styleClass="btn btn-warning" action="#{usuarioBean.consultarUsuario}" value="Consultar Usuario">
+								<h:commandButton styleClass="btn btn-success" action="#{usuarioBean.consultarUsuario}" value="Consultar Usuario">
 									<f:param name ="idUsuario" value ="#{usuarioBean.id}"></f:param>
 									<f:param name ="idUsuarioConsul" value ="#{usuario.id}"></f:param>
 								</h:commandButton>

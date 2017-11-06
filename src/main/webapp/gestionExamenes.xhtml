@@ -21,7 +21,7 @@
 				<div class="panel-heading text-center">
 					<h1>Gestionar Examenes</h1>
 				</div>
-				<div class="panel panel-default">
+				<div class="panel panel-warning">
                     <div class="panel-body">
 						<h:form>
 							<h:dataTable value="#{examenBean.allExamenes}" var="gestionExamen" class="table table-hover" headerClass="order-table-header"
@@ -44,7 +44,7 @@
                                  
 								<h:column>
 									<f:facet name="header">Accion</f:facet>
-					    	  		<h:commandButton action="#{examenBean.editarExamen}" class="btn btn-success" value="Modificar">
+					    	  		<h:commandButton action="#{examenBean.editarExamen}" class="btn btn-info" value="Modificar">
 
 	                				</h:commandButton>
                                     <h:commandButton action="#{examenBean.deshabilitarExamen}" style="margin-left:5px" class="btn btn-danger" value="Deshabilitar">
@@ -54,7 +54,7 @@
 
 							</h:dataTable>
                            
-                        	<h:commandLink action="#{usuarioBean.nuevoExamen}" styleClass="btn btn-success btn-block">
+                        	<h:commandLink action="#{usuarioBean.nuevoExamen}" styleClass="btn btn-primary btn-block">
                         	       			<h:outputText value ="Agregar nuevo Examen"></h:outputText>
                         	       			<f:param name ="idUsuario" value ="#{usuarioBean.idUser}"></f:param>
                         	</h:commandLink>

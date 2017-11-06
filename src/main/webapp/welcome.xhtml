@@ -23,10 +23,10 @@
 </h:head>
 
 <h:body>
-	<h3 class="text-center">Bienvenidos al sistema de evaluación</h3>
+	<h3 class="text-center">Sistema de evaluación</h3>
 	
 <div class="nav-side-menu">
-	<div class="brand">Panel de control: </div>
+	<div class="brand">Menú: </div>
 		<h:form id="myForm">
  			 
 			<h:inputHidden value="#{sessionScope.all}"   id="grantAll" />
@@ -86,12 +86,6 @@
                   		<a href="#"><i class="fa fa-gift fa-lg"></i> Alumnos <span class="arrow"></span></a>
                 	</li>
 					<ul id="alumno" class="sub-menu collapse">
-						<li>
-							<h:commandLink action="#{usuarioBean.admin}">
-								<h:outputText value ="Examenes"></h:outputText>
-								<f:param name ="idUsuario" value ="#{usuarioBean.id}"></f:param>
-							</h:commandLink>
-						</li>
 						<li>
 							<h:commandLink action="#{examenBean.listarRendirExamen}">
 								<h:outputText value ="Rendir Examen"></h:outputText>

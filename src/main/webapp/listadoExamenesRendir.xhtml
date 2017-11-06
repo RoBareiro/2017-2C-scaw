@@ -21,7 +21,7 @@
 				<div class="panel-heading text-center">
 					<h1> Gestión de examenes</h1>
 				</div>
-				<div class="panel panel-default">
+				<div class="panel panel-warning">
                     <div class="panel-body">
 						<h:form>
 							<h:dataTable value="#{examenBean.allExamenesActivos}" var="gestionExamen" class="table table-hover" headerClass="order-table-header"
@@ -40,7 +40,7 @@
                                  
 								<h:column>
 									<f:facet name="header">Accion</f:facet>
-					    	  		<h:commandButton action="#{examenBean.rendirExamen}" class="btn btn-success" value="Enviar">
+					    	  		<h:commandButton action="#{examenBean.rendirExamen}" class="btn btn-info" value="Rendir">
 					    	  		</h:commandButton>
 					    	  		
 						   		</h:column> 

@@ -28,9 +28,9 @@ public class UsuarioDaoImpl implements UsuarioDao {
 			PreparedStatement ps = conn.prepareStatement("SELECT * FROM Usuarios u "
 					+ " inner join rolesusuarios ru "
 					+ " on u.id = ru.idusuario "
-					+ " where eMail = ? and idEstadoUsuario = 2 ");
+					+ " where eMail = '" + usuario.getEmail() + "' and idEstadoUsuario = 2 ");
 				
-			ps.setString(1, usuario.getEmail());
+			//ps.setString(1, usuario.getEmail());
 						
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()){

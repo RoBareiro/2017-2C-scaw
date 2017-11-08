@@ -6,5 +6,8 @@
   <session-config>
     <session-timeout>30</session-timeout>
     <tracking-mode>COOKIE</tracking-mode>
+    <cookie-config>
+		<secure>true</secure>
+	</cookie-config>
   </session-config>
 </web-app>

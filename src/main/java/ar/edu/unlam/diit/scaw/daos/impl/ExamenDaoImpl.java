@@ -151,9 +151,16 @@ public class ExamenDaoImpl implements ExamenDao {
 	@Override
 	public void salvarExamen(Examenes examen) {
 		try {
+			Integer lastid = null;
 			Integer id = this.getIdExamen();
 			conn = (dataSource.dataSource()).getConnection();
-	
+			Statement stmt = conn.createStatement();
+
+			ResultSet rs = stmt.executeQuery("select id from examenes order by id desc limit 1"); 
+			
+			while(rs.next()){
+				lastid = rs.getInt("id") + 1;
+			}
 			
 			//Statement query;
 			
@@ -164,9 +171,10 @@ public class ExamenDaoImpl implements ExamenDao {
 			//String sql = "INSERT INTO Examenes (id,nombre, idMateria, idEstadoExamen) VALUES("+id+"," + nombre + "," + idmateria + ", "+examen.getIdEstadoExamen()+")";
 			//System.out.println(sql);
 			//query.executeUpdate(sql);  
-			PreparedStatement sql = conn.prepareStatement("INSERT INTO Examenes (id,nombre, idMateria, idEstadoExamen) VALUES(?,?,1)");
-			sql.setString(1, examen.getNombre());
-			sql.setInt(2, examen.getIdMateria());
+			PreparedStatement sql = conn.prepareStatement("INSERT INTO Examenes (id,nombre, idMateria, idEstadoExamen) VALUES(?,?,?,1)");
+			sql.setInt(1, lastid);
+			sql.setString(2, examen.getNombre());
+			sql.setInt(3, examen.getIdMateria());
 			sql.executeUpdate();
 			sql.close();
 			

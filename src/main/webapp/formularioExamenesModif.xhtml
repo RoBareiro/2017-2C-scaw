@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<title>Panel de Adminsitración</title>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet"
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+		<style>
+		.error {
+		color: red;
+		}
+		</style>
+</h:head>
+<body>
+	<div class="container">
+
+		<div class="row">
+
+			<div class="col-md-2"></div>
+
+			<div class="col-md-8">
+
+				<div class="panel panel-success">
+					<div class="panel-heading text-center">
+						<h1>Gestion de examenes</h1>
+					</div>
+					<div class="panel-body">
+						<div class="col-md-2"></div>
+						<div class="col-md-10">
+
+							<h:form rendered="true" id="form">
+								<h:inputHidden value="#{examenBean.examenSelected.id}" id="examenId"/>
+								<h2>Titulo</h2>
+								<h:inputText styleClass="form-control" size="60"
+									value="#{examenBean.nombre}" id="nombreExamen" >
+								</h:inputText>
+								<h:message class="error" for="nombreExamen" />
+								<h2>Materia</h2>
+								
+								<div class="form-group">
+									<h:selectOneMenu value="#{examenBean.idMateria}" name="id"
+										target="#{examenBean.id}" class="form-control">
+										<f:selectItem itemValue="#{null}"
+											itemLabel="Elegir la materia" />
+										<f:selectItems value="#{materiaBean.allMaterias}" var="mat"
+											itemLabel="#{mat.nombreMateria}" itemValue="#{mat.idMateria}" />
+									</h:selectOneMenu>
+								</div>
+
+								<h2>Estado</h2>
+								<h:selectOneRadio value="#{examenBean.idEstadoExamen}">
+									<f:selectItem itemValue="1" itemLabel="Pendiente" />
+									<f:selectItem itemValue="2" itemLabel="Examen en Curso" />
+									<f:selectItem itemValue="3" itemLabel="Examen Finalizado" />
+								</h:selectOneRadio>
+
+							<h:commandLink action="#{examenBean.guardarExamen}" styleClass="btn btn-success btn-block" value="#{examenBean.textSalvarExamen}">
+                        	</h:commandLink>
+                        	<h:commandLink action="gestionExamenes" styleClass="btn btn-back btn-block" value="Volver">
+                        	</h:commandLink>
+							<h:messages class="error"></h:messages>
+							</h:form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

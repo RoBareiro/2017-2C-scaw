@@ -56,7 +56,7 @@ public class ExamenBean implements Serializable {
 		this.idMateria		= this.examenSelected.getIdMateria();
 		this.idEstadoExamen	= this.examenSelected.getIdEstadoExamen();
 		this.preguntas		= this.examenSelected.getPreguntas();
-		return "formularioExamenes";
+		return "formularioExamenesModif";
 	}
 	
 	
@@ -73,48 +73,21 @@ public class ExamenBean implements Serializable {
 	}
 		
 	public String guardarExamen(){
-		boolean err=false;
-		List<Preguntas> pregDef = new ArrayList<>();
-		for (int i=0;i<preguntas.size();i++) {
-			Preguntas preg = preguntas.get(i);
-			if (preg.getPregunta().equals("") && i==0) {
-				err=true;
-				FacesContext.getCurrentInstance().addMessage("form:j_idt16:"+i+":pregunta", new FacesMessage("Debe completar al menos una pregunta"));
-			} else if (!preg.getPregunta().equals("")) {
-				if (this.validateRespuestas(preg.getRespuestas())) {
-					preg.setRespuestas(this.getRespuestasOk(preg.getRespuestas()));
-					//la pregunta esta OK y tiene respuestas
-					pregDef.add(preg);
-				} else {
-					err=true;
-					FacesContext.getCurrentInstance().addMessage("form:j_idt16:"+i+":pregunta", new FacesMessage("Las preguntas deben tener al menos 1 respuesta correcta y uno incorrecta"));
-				}
-				
-			}
-		}
-		if (pregDef.size()<5) {
-			err=true;
-			FacesContext.getCurrentInstance().addMessage("form:nombreExamen", new FacesMessage("Debe completar al menos 5 preguntas"));
-		}
 		
-		if (err!=true) {
-			Examenes examenes = new Examenes();
-			examenes.setNombre(this.nombre);
-			examenes.setIdMateria(idMateria);
-			examenes.setIdEstadoExamen(idEstadoExamen);
-			examenes.setPreguntas(pregDef);
-			//examenes.setPreguntas(preguntas);
-			
-			if (this.examenSelected.getId()==null) {
-				servicioExamen.guardarExamen(examenes);
-			} else {
-				examenes.setId(this.examenSelected.getId());
-				servicioExamen.editarExamen(examenes);
-			}
-
-			return "gestionExamenes";	
+		Examenes examenes = new Examenes();
+		examenes.setNombre(this.nombre);
+		examenes.setIdMateria(idMateria);
+		examenes.setIdEstadoExamen(idEstadoExamen);
+		//examenes.setPreguntas(preguntas);
+		
+		if (this.examenSelected.getId()==null) {
+			servicioExamen.guardarExamen(examenes);
+		} else {
+			examenes.setId(this.examenSelected.getId());
+			servicioExamen.editarExamen(examenes);
 		}
-		return "formularioExamenes";
+
+		return "gestionExamenes";
 	}
 	
 

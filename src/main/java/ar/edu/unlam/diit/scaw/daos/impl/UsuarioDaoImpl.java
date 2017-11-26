@@ -113,7 +113,7 @@ public class UsuarioDaoImpl implements UsuarioDao {
 				usuario.setId(lastid);
 			}
 	        
-	        PreparedStatement ps = conn.prepareStatement("INSERT INTO Usuarios(Id,Email,Contraseña,Apellido,Nombre,idEstadoUsuario)"
+	        PreparedStatement ps = conn.prepareStatement("INSERT INTO Usuarios(Id,Email,Clave,Apellido,Nombre,idEstadoUsuario)"
 	        		+ "  VALUES(?,?,?,?,?,1)");
 	        ps.setInt(1, usuario.getId());
 			ps.setString(2,usuario.getEmail());			
@@ -310,21 +310,19 @@ public class UsuarioDaoImpl implements UsuarioDao {
 	}
 	
 	@Override
-	public void updateUsuario(Integer id,String mail, String clave,String apellido,String nombre){
+	public void updateUsuario(Integer id,String mail,String apellido,String nombre){
 		try {
 			conn = (dataSource.dataSource()).getConnection();
 		
 			PreparedStatement ps = conn.prepareStatement("UPDATE Usuarios Set"
 					+ " eMail = ? ,"
-					+ " clave = ? , "
 					+ " apellido = ? , "
 					+ " nombre = ?   "
 					+ " where id = ? ");
 			ps.setString(1,mail);
-			ps.setString(2,clave);
-			ps.setString(3,apellido);
-			ps.setString(4,nombre);
-			ps.setInt(5, id);
+			ps.setString(2,apellido);
+			ps.setString(3,nombre);
+			ps.setInt(4, id);
 						
 			ps.executeUpdate();
 						

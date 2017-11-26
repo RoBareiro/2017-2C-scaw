@@ -67,23 +67,10 @@
 							</div>
 							<div class=" login-input input-group">
 								<h:outputText id="error-mail" styleClass="alert alert-danger"></h:outputText>
-							</div>
-							<div  class=" login-input input-group">
-								<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-								<h:inputSecret styleClass ="form-control" value="#{usuarioBean.clave}" id="pass" h:placeholder="Ingrese Contraseña"></h:inputSecret>
-							</div>
-							<div class=" login-input input-group">
-								<h:outputText id="error-pass" styleClass="alert alert-danger"></h:outputText>
-							</div>
-							<div class=" login-input input-group">
-								<h:selectOneMenu value="#{usuarioBean.idRol}" id ="idRol" name="idrol" target="#{usuarioBean.idRol}" class="form-control">
-        							<f:selectItem itemValue="#{null}" itemLabel="Elegir rol de usuario" />
-            						<f:selectItems value="#{usuarioBean.roles}" var="rol" itemLabel="#{rol.descripcion}" itemValue="#{rol.id}"/>
-								</h:selectOneMenu>
-							</div>		
+							</div>	
 						</div>		
 						<div class=" login-input input-group">
-							<h:commandLink id="Guardar cambios" action="#{usuarioBean.actualizarUsuario}" styleClass="btn btn-success" value="Actualizar Usuario" >
+							<h:commandLink id="GuardarCambios" action="#{usuarioBean.actualizarUsuario}" styleClass="btn btn-success" value="Actualizar Usuario" >
 							</h:commandLink>
 						</div>
 

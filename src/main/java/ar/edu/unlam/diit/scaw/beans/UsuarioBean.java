@@ -164,7 +164,7 @@ public String gestionExamenes(){
 	String logeado = session.getAttribute("logeado").toString();
 	Integer idUsuario = Integer.parseInt(id);
 	
-	if(service.isGrantAdm(idUsuario) || service.isGrantAll(idUsuario) && logeado.equals("Y")){
+	if(service.isGrantDoc(idUsuario) || service.isGrantAll(idUsuario) && logeado.equals("Y")){
 			return "gestionExamenes";	
 	}
 	error = "No tienes permisos/privilegios para realizar la accion deseada";
@@ -205,7 +205,7 @@ public String nuevoExamen(){
 	String logeado = session.getAttribute("logeado").toString();
 	Integer idUsuario = Integer.parseInt(id);	 
 	
-	if(service.isGrantAdm(idUsuario) || service.isGrantAll(idUsuario) && logeado.equals("Y")){	
+	if(service.isGrantDoc(idUsuario) || service.isGrantAll(idUsuario) && logeado.equals("Y")){	
 		return "formularioExamenes";
 	}
 	error = "No tienes permisos/privilegios para realizar la accion deseada";
@@ -227,15 +227,10 @@ public String nuevoExamen(){
 		Integer idUsuario = Integer.parseInt(Usuario);
 		List<Usuario> userspend = service.findPend();
 		Usuario useramodif = service.findById(idUsuario);
-		
-				System.out.println("**************************************USER: " + useramodif.toString());
-
-				System.out.println("**************************************LISTAUSERS: " + userspend.toString());
-
 				
 		if(service.isGrantAdm(idLogueado) || service.isGrantAll(idLogueado) && logeado.equals("Y")){
 			//Chequea que no haya solicitudes pendientes
-			if(userspend.contains(useramodif)){
+			if(findUserInList(userspend, useramodif.getId())){
 
 				if(opc == 2 || opc == 3){
 					
@@ -256,7 +251,17 @@ public String nuevoExamen(){
 		error = "No tienes permisos/privilegios para realizar la accion deseada";
 		return "welcome";
 	
-}
+	}
+	
+	public boolean findUserInList(List<Usuario> userList, Integer idUserAModif)
+	{
+	   for(Usuario u : userList) {
+	        if(u.getId().equals(idUserAModif)) {
+	            return true;
+	        }
+	    }
+	    return false;
+	}
 	
 	public String consultarUsuario(){
 		
@@ -323,8 +328,8 @@ public String nuevoExamen(){
 				error = "EL mail ingresado es invalido, introduce un mail valido";
 				return "editarUsuario";
 			}else{
-				String passEncript = service.encriptar(this.clave);
-				service.actualizarUsuario(this.id, this.eMail,passEncript, this.apellido, this.nombre);
+				
+				service.actualizarUsuario(this.id, this.eMail, this.apellido, this.nombre);
 			}
 			
 		}catch(Exception e){

@@ -15,7 +15,7 @@ public interface UsuarioService {
 	public List<Rol> getRoles();
 	public void actualizarEstado(Integer id,Integer cdEstado);
 	public List<Usuario> getAllProfesores();
-	public void actualizarUsuario(Integer id,String mail, String clave,String apellido,String nombre);
+	public void actualizarUsuario(Integer id,String mail, String apellido,String nombre);
 	public boolean isGrantAll(Integer id);
 	public boolean isGrantDoc(Integer id);
 	public boolean isGrantAlu(Integer id);

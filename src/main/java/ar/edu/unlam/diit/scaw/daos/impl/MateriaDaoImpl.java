@@ -63,12 +63,23 @@ public class MateriaDaoImpl implements MateriaDao{
 	@Override
 	public void salvarMateria(Materia materia) {
 		try {
+			Integer lastid = null;
+			
 			conn = (dataSource.dataSource()).getConnection();
-		
+			Statement stmt = conn.createStatement();
+			
+			ResultSet rs = stmt.executeQuery("select id from materias order by id desc limit 1"); 
+			
+			while(rs.next()){
+				//Sumo 1, deberia ser el proximo usuario
+				lastid = rs.getInt("id") + 1;
+			}
+			
 			// Creo la consulta SQL
-			PreparedStatement ps = conn.prepareStatement("INSERT INTO Materias (nombre, idDocenteTitular, idEstadoMateria) VALUES(?,?,1)");
-			ps.setString(1, materia.getNombre());
-			ps.setInt(2, materia.getIdDocenteTitular());
+			PreparedStatement ps = conn.prepareStatement("INSERT INTO Materias (id, nombre, idDocenteTitular, idEstadoMateria) VALUES(?,?,?,1)");
+			ps.setInt(1, lastid);
+			ps.setString(2, materia.getNombre());
+			ps.setInt(3, materia.getIdDocenteTitular());
 			
 			// Ejecuto la sentencia
 			ps.executeUpdate();

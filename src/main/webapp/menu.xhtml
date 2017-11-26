@@ -5,8 +5,7 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
-	>
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
 
 <h:head>
 </h:head>
@@ -66,12 +65,6 @@
 								<f:param name ="idUsuario" value ="#{usuarioBean.id}"></f:param>
 							</h:commandLink>
 						</li>
-						<li>
-							<h:commandLink action="#{usuarioBean.admin}">
-								<h:outputText value ="Examenes"></h:outputText>
-								<f:param name ="idUsuario" value ="#{usuarioBean.id}"></f:param>
-							</h:commandLink>
-						</li>
 					</ul>
 					<li id="aluLI" data-toggle="collapse" data-target="#alumno" class="collapsed active">
                   		<a href="#"><i class="fa fa-gift fa-lg"></i> Alumnos <span class="arrow"></span></a>
@@ -97,77 +90,4 @@
 	</h:form>
 </div>
 </h:body>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
-	
-<div class="nav-side-menu">
-	<div class="brand">Panel de Usuario</div>
-		<h:form id="myForm">
- 			 
-			<h:inputHidden value="#{sessionScope.all}"   id="grantAll" />
-			<h:inputHidden value="#{sessionScope.adm}"   id="grantAdm" />
-			<h:inputHidden value="#{sessionScope.alu}"   id="grantAlu" />
-			<h:inputHidden value="#{sessionScope.doc}"   id="grantDoc" />
-			
-			<div class = "menu-list">	
-				<ul class ="menu-content collapse out">
-					<li>
-						<h:commandLink action="#{usuarioBean.admin}">
-							<h:outputText value ="Perfil"></h:outputText>
-							<f:param name ="idUsuario" value ="#{usuario.id}"></f:param>
-						</h:commandLink>
-					</li>
-					<li id="admLi" data-toggle="collapse" data-target="#administrar" class="collapsed active">
-                  		<a href="#"><i class="fa fa-gift fa-lg"></i> Administración <span class="arrow"></span></a>
-                	</li>
-					<ul class="sub-menu collapse" id="administrar">
-					<li>
-						<h:commandLink action="#{usuarioBean.solicitudesUsuarios}">
-							<h:outputText value ="Solicitudes Usuarios"></h:outputText>
-							<f:param name ="idUsuario" value ="#{usuarioBean.id}"></f:param>
-						</h:commandLink>
-					</li>
-					<li>
-						<h:commandLink id="perfil" 
-							action="#{usuarioBean.gestionMaterias}" value="Materias">
-							<f:param name ="idUsuario" value ="#{usuarioBean.id}"></f:param>
-						</h:commandLink>
-					</li>
-					<li>
-						<h:commandLink id="usuario" 
-							action="#{usuarioBean.usuariosActivos}" value="Usuarios">
-							<f:param name ="idUsuario" value ="#{usuarioBean.id}"></f:param>
-						</h:commandLink>
-					</li>
-					</ul>
-					<li id="docLi" data-toggle="collapse" data-target="#docente" class="collapsed active">
-                  		<a href="#"><i class="fa fa-gift fa-lg"></i> Docentes <span class="arrow"></span></a>
-                	</li>
-					<ul id="docente" class="sub-menu collapse">
-						<li>
-							<h:commandLink action="#{usuarioBean.gestionExamenes}">
-								<h:outputText value ="Examenes"></h:outputText>
-								<f:param name ="idUsuario" value ="#{usuarioBean.idUser}"></f:param>
-							</h:commandLink>
-						</li>
-						
-					</ul>
-					<li id="aluLI" data-toggle="collapse" data-target="#alumno" class="collapsed active">
-                  		<a href="#"><i class="fa fa-gift fa-lg"></i> Alumno <span class="arrow"></span></a>
-                	</li>
-					<ul id="alumno" class="sub-menu collapse">
-						<li>
-							<h:commandLink action="#{usuarioBean.admin}">
-								<h:outputText value ="Examenes"></h:outputText>
-								<f:param name ="idUsuario" value ="#{usuarioBean.id}"></f:param>
-							</h:commandLink>
-						</li>
-						
-					</ul>
-					
-				</ul>
-			</div>
-	</h:form>
-</div>
 </html>

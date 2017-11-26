@@ -80,9 +80,9 @@ public class UsuarioServiceImpl implements UsuarioService {
 	}
 	
 	@Override
-	public void actualizarUsuario(Integer id,String mail, String clave,String apellido,String nombre){
+	public void actualizarUsuario(Integer id,String mail,String apellido,String nombre){
 		
-		usuarioHsql.updateUsuario(id, mail, clave, apellido, nombre);
+		usuarioHsql.updateUsuario(id, mail, apellido, nombre);
 	}
 
 	@Override
@@ -165,6 +165,13 @@ public class UsuarioServiceImpl implements UsuarioService {
 	}
 	
 	public boolean isValidPass(String pass1,String pass2){
+		
+		try {
+			pass1 = encriptar(pass1);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			return false;
+		}
 		
 		if(pass1.equals(pass2)){
 			return true;

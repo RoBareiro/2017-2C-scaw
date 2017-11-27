@@ -153,6 +153,9 @@ public class ExamenDaoImpl implements ExamenDao {
 		try {
 			Integer lastid = null;
 			Integer id = this.getIdExamen();
+			Integer idExamen = 0;
+			Integer idPregunta = 0;
+			Integer idRespuesta = 0;
 			conn = (dataSource.dataSource()).getConnection();
 			Statement stmt = conn.createStatement();
 
@@ -162,32 +165,53 @@ public class ExamenDaoImpl implements ExamenDao {
 				lastid = rs.getInt("id") + 1;
 			}
 			
-			//Statement query;
+			idExamen = lastid;
 			
-			//query = conn.createStatement();
-			
-			//String nombre = " '" + examen.getNombre() + "' ";
-			//Integer idmateria = examen.getIdMateria();
-			//String sql = "INSERT INTO Examenes (id,nombre, idMateria, idEstadoExamen) VALUES("+id+"," + nombre + "," + idmateria + ", "+examen.getIdEstadoExamen()+")";
-			//System.out.println(sql);
-			//query.executeUpdate(sql);  
 			PreparedStatement sql = conn.prepareStatement("INSERT INTO Examenes (id,nombre, idMateria, idEstadoExamen) VALUES(?,?,?,1)");
-			sql.setInt(1, lastid);
+			sql.setInt(1, idExamen);
 			sql.setString(2, examen.getNombre());
 			sql.setInt(3, examen.getIdMateria());
 			sql.executeUpdate();
-			sql.close();
 			
+			rs = stmt.executeQuery("select id from preguntas order by id desc limit 1"); 
 			
-			try {
-				insertPreguntas(id,examen.getPreguntas());
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			while(rs.next()){
+				lastid = rs.getInt("id") + 1;
 			}
-			/*for (Preguntas item : examen.getPreguntas()) {
-				System.out.println(item.getPregunta());
-			}*/
+			
+			idPregunta = lastid;
+			
+		    for(Preguntas p : examen.getPreguntas()) {
+		    	PreparedStatement sqlPreg = conn.prepareStatement("INSERT INTO preguntas (id, idExamen, pregunta) VALUES (?,?,?)");
+		    	sqlPreg.setInt(1, idPregunta);
+		    	sqlPreg.setInt(2, idExamen);
+		    	sqlPreg.setString(3, p.getPregunta());
+		    	sqlPreg.executeUpdate();
+		    	
+				rs = stmt.executeQuery("select id from respuestas order by id desc limit 1"); 
+				
+				while(rs.next()){
+					lastid = rs.getInt("id") + 1;
+					idRespuesta = lastid;
+				}
+		    	
+		    	for(Respuestas r : p.getRespuestas()) {
+		    		PreparedStatement sqlRta = conn.prepareStatement("INSERT INTO respuestas (id, idpregunta, respuesta, idtiporespuesta) VALUES (?,?,?,?)");
+		    		sqlRta.setInt(1, idRespuesta);
+		    		sqlRta.setInt(2, idPregunta);
+		    		sqlRta.setString(3, r.getRespuesta());
+		    		sqlRta.setInt(4, r.getIdTipoRespuesta());
+		    		sqlRta.executeUpdate();
+		    		
+		    		idRespuesta++;
+					sqlRta.close();
+		    	}
+		    	
+		    	idPregunta++;
+				sqlPreg.close();
+		    }
+			
+			sql.close();
 			
 			conn.close();
 		} catch (SQLException e) {

@@ -73,11 +73,21 @@ public class ExamenBean implements Serializable {
 	}
 		
 	public String guardarExamen(){
+		List<Preguntas> pregDef = new ArrayList<>();
+		for (int i=0;i<preguntas.size();i++) {
+			Preguntas preg = preguntas.get(i);
+			preg.setRespuestas(this.getRespuestasOk(preg.getRespuestas()));
+			//la pregunta esta OK y tiene respuestas
+			pregDef.add(preg);
+		}
 		
 		Examenes examenes = new Examenes();
 		examenes.setNombre(this.nombre);
 		examenes.setIdMateria(idMateria);
 		examenes.setIdEstadoExamen(idEstadoExamen);
+		if(pregDef.size() > 0) {
+			examenes.setPreguntas(pregDef);
+		}
 		//examenes.setPreguntas(preguntas);
 		
 		if (this.examenSelected.getId()==null) {
